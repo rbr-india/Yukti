@@ -1,0 +1,2050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#080C18">
+<title>Yukti — Global Real Estate Advisory | Singapore</title>
+<meta name="description" content="Yukti is a Singapore-based independent real estate advisory firm providing institutional and private capital with research, due diligence, and deal support across global markets.">
+<meta property="og:title" content="Yukti — Global Real Estate Advisory">
+<meta property="og:description" content="Independent real estate advisory for institutional and private capital. Research, diligence, and deal support across Asia-Pacific, the Middle East, Europe, the Americas, and South Asia.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Yukti Trading Pte Ltd">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══ TOKENS ═══ */
+:root {
+  --navy:       #080C18;
+  --navy-mid:   #111726;
+  --navy-card:  #161D30;
+  --navy-hover: #1C2438;
+  --gold:       #CEAC55;
+  --gold-lt:    #D9BB6E;
+  --gold-dim:   rgba(196,162,74,0.12);
+  --gold-line:  rgba(196,162,74,0.28);
+  --white:      #EEE9E0;
+  --grey:       #ABB1C4;
+  --grey-dim:   rgba(122,128,150,0.18);
+  --serif:      'Cormorant Garamond', Georgia, serif;
+  --sans:       'Inter', system-ui, sans-serif;
+  --util:       'Space Grotesk', system-ui, sans-serif;
+}
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; background:#080C18; color-scheme:dark; }
+html { -webkit-text-size-adjust:100%; scroll-padding-top:80px; }
+:root { --pad: clamp(20px, 5vw, 64px); --navy:#080C18; --navy-mid:#111726; --navy-card:#161D30; --navy-hover:#1C2438; --gold:#CEAC55; --gold-lt:#D9BB6E; --gold-dim:rgba(196,162,74,0.12); --gold-line:rgba(196,162,74,0.28); --white:#EEE9E0; --grey:#ABB1C4; --grey-dim:rgba(122,128,150,0.18); }
+body {
+  --pad: clamp(20px, 5vw, 64px);
+  background:var(--navy); color:var(--white);
+  font-family:var(--sans); font-size:15px; line-height:1.7;
+  overflow-x:hidden; -webkit-font-smoothing:antialiased;
+}
+
+/* ═══ SCROLL PROGRESS ═══ */
+#progress {
+  position:fixed; top:0; left:0; height:2px; width:0;
+  background:var(--gold); z-index:400; transition:width 0.1s linear;
+}
+
+/* ═══ NAV ═══ */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:300;
+  padding:26px var(--pad); display:flex; align-items:center; justify-content:space-between;
+  transition:background 0.4s, padding 0.4s, border-color 0.4s;
+  border-bottom:1px solid transparent;
+}
+nav.stuck {
+  background:rgba(8,12,24,0.94); backdrop-filter:blur(14px);
+  padding:16px var(--pad); border-bottom-color:var(--grey-dim);
+}
+.logo {
+  font-family:var(--util); font-size:17px; font-weight:600;
+  letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--white); cursor:pointer; text-decoration:none;
+}
+.logo span { color:var(--gold); }
+.nav-links { display:flex; gap:36px; list-style:none; }
+.nav-links a {
+  font-family:var(--util); font-size:11px; font-weight:400;
+  letter-spacing:0.16em; text-transform:uppercase;
+  color:#C5CADB; text-decoration:none; cursor:pointer; transition:color 0.2s;
+  outline:none;
+}
+.nav-links a:hover, .nav-links a.on, .nav-links a:focus-visible { color:var(--white); }
+.nav-links a:focus-visible { text-decoration:underline; text-underline-offset:5px; text-decoration-color:var(--gold); }
+.nav-btn {
+  font-family:var(--util); font-size:10px; font-weight:500;
+  letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--gold); border:1px solid var(--gold-line);
+  padding:10px 22px; cursor:pointer; background:none;
+  transition:background 0.2s, color 0.2s;
+}
+.nav-btn:hover, .nav-btn:focus-visible { background:var(--gold); color:var(--navy); }
+
+/* Hamburger + drawer */
+.burger {
+  display:none; flex-direction:column; gap:5px;
+  background:none; border:none; cursor:pointer; padding:8px;
+}
+.burger span { display:block; width:24px; height:1.5px; background:var(--white); transition:transform 0.3s, opacity 0.3s; }
+.drawer {
+  position:fixed; top:0; right:-300px; width:280px; height:100vh;
+  background:var(--navy-mid); border-left:1px solid var(--grey-dim);
+  z-index:350; padding:90px 36px 36px; transition:right 0.35s cubic-bezier(.4,0,.2,1);
+  display:flex; flex-direction:column; gap:6px;
+}
+.drawer.open { right:0; box-shadow:-30px 0 60px rgba(0,0,0,0.5); }
+.drawer a {
+  font-family:var(--util); font-size:13px; letter-spacing:0.14em;
+  text-transform:uppercase; color:var(--grey); text-decoration:none;
+  cursor:pointer; padding:14px 0; border-bottom:1px solid var(--grey-dim);
+  transition:color 0.2s; outline:none;
+}
+.drawer a:hover, .drawer a.on, .drawer a:focus-visible { color:var(--gold); }
+.drawer .nav-btn { margin-top:24px; text-align:center; }
+.drawer-close {
+  position:absolute; top:26px; right:28px;
+  background:none; border:none; color:var(--grey); font-size:24px;
+  cursor:pointer; line-height:1;
+}
+.scrim {
+  position:fixed; inset:0; background:rgba(0,0,0,0.5);
+  z-index:340; opacity:0; pointer-events:none; transition:opacity 0.3s;
+}
+.scrim.show { opacity:1; pointer-events:auto; }
+
+/* ═══ PAGE SYSTEM ═══ */
+.page { display:none; background:var(--navy); }
+.page.on { display:block; animation:fadeUp 0.45s ease both; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(14px);} to{opacity:1;transform:translateY(0);} }
+
+/* ═══ ATOMS ═══ */
+.eyebrow {
+  font-family:var(--util); font-size:11px; font-weight:500;
+  letter-spacing:0.26em; text-transform:uppercase; color:var(--gold-lt);
+}
+.rule { width:48px; height:1px; background:var(--gold); margin:18px 0 24px; }
+.display { font-family:var(--serif); font-weight:300; line-height:1.06; letter-spacing:-0.012em; }
+.display em { font-style:italic; color:var(--gold); }
+.body-copy { font-size:14px; color:var(--grey); line-height:1.85; }
+.lead { font-size:15px; color:var(--grey); line-height:1.85; }
+
+.btn-fill {
+  display:inline-block; font-family:var(--util); font-size:10px;
+  font-weight:500; letter-spacing:0.16em; text-transform:uppercase;
+  background:var(--gold); color:var(--navy);
+  padding:13px 30px; cursor:pointer; border:none;
+  text-decoration:none; transition:background 0.2s; outline:none;
+}
+.btn-fill:hover, .btn-fill:focus-visible { background:var(--gold-lt); }
+.btn-ghost-link {
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--util); font-size:10px; font-weight:400;
+  letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--grey); background:none; border:none;
+  cursor:pointer; text-decoration:none; transition:color 0.2s; outline:none;
+}
+.btn-ghost-link::after { content:'→'; }
+.btn-ghost-link:hover, .btn-ghost-link:focus-visible { color:var(--white); }
+
+/* ═══ HERO ═══ */
+.hero {
+  min-height:100vh; display:flex; flex-direction:column;
+  justify-content:center; padding:clamp(90px,12vw,130px) var(--pad) clamp(60px,9vw,100px);
+  position:relative; overflow:hidden;
+}
+.hero-photo {
+  position:absolute; inset:0; pointer-events:none;
+  background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3F1kMbFFa9l6nNiOkWT8rYXZ0aE/hf_20260612_135610_edb6566c-d021-4616-85f6-399803cf0873.png');
+  background-size:110%; background-position:50% 55%;
+  opacity:0;
+  animation: heroPan 18s cubic-bezier(0.25,0.1,0.25,1) 0.3s forwards,
+             heroFadeIn 1.8s ease 0.3s forwards;
+  will-change: background-size, background-position, opacity;
+}
+@keyframes heroPan {
+  0%   { background-size:110%; background-position:50% 55%; }
+  100% { background-size:120%; background-position:48% 50%; }
+}
+@keyframes heroFadeIn {
+  0%   { opacity:0; }
+  100% { opacity:0.58; }
+}
+
+.hero-stagger-1,.hero-stagger-2,.hero-stagger-3,.hero-stagger-4{opacity:0;transform:translateY(22px);}
+.hero-stagger-1{animation:heroText 0.9s cubic-bezier(0.22,1,0.36,1) 0.9s forwards;}
+.hero-stagger-2{animation:heroText 0.9s cubic-bezier(0.22,1,0.36,1) 1.15s forwards;}
+.hero-stagger-3{animation:heroText 0.9s cubic-bezier(0.22,1,0.36,1) 1.4s forwards;}
+.hero-stagger-4{animation:heroText 0.9s cubic-bezier(0.22,1,0.36,1) 1.65s forwards;}
+@keyframes heroText{to{opacity:1;transform:none;}}
+@media(prefers-reduced-motion:reduce){
+  .hero-stagger-1,.hero-stagger-2,.hero-stagger-3,.hero-stagger-4{opacity:1;transform:none;animation:none;}
+}
+@media(prefers-reduced-motion: reduce){
+  .hero-photo { animation:none; opacity:0.55; background-size:cover; }
+}
+.hero-art {
+  position:absolute; inset:0; pointer-events:none;
+}
+.hero-art svg { position:absolute; right:0; top:0; height:100%; width:auto; min-width:60%; opacity:0.35; }
+.hero-fade {
+  position:absolute; inset:0;
+  background:
+    linear-gradient(0deg, var(--navy) 0%, rgba(8,12,24,0) 30%),
+    linear-gradient(90deg, var(--navy) 28%, rgba(8,12,24,0.78) 55%, rgba(8,12,24,0.3) 100%);
+  pointer-events:none;
+}
+.hero-coord {
+  position:absolute; top:148px; right:64px; z-index:2;
+  font-family:var(--util); font-size:10px; letter-spacing:0.12em;
+  color:rgba(217,187,110,0.65); transition:opacity 0.4s ease;
+}
+.hero-inner { position:relative; z-index:2; width:100%; max-width:100%; }
+.hero h1 { font-size:clamp(50px,7vw,94px); max-width:880px; margin-bottom:30px; }
+.hero p.sub { max-width:520px; margin-bottom:48px; }
+.hero-ctas { display:flex; gap:20px; align-items:center; flex-wrap:wrap; }
+
+/* ═══ STATS ═══ */
+.stats-wrap { padding:clamp(40px,6vw,60px) var(--pad) 0; }
+.stats-rule { height:1px; background:linear-gradient(90deg, var(--gold-line), transparent); margin-bottom:0; }
+.stats-row {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  width:100%;
+  border-left:1px solid var(--grey-dim);
+}
+.stat { padding:38px 32px; border-right:1px solid var(--grey-dim); border-bottom:1px solid var(--grey-dim); }
+.stat-n { font-family:var(--serif); font-size:50px; font-weight:300; color:var(--gold); line-height:1; margin-bottom:8px; }
+.stat-n sup { font-size:22px; vertical-align:super; }
+.stat-lbl { font-family:var(--util); font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--grey); line-height:1.7; }
+
+/* ═══ MAP ═══ */
+.map-sec { padding:clamp(60px,9vw,100px) var(--pad); }
+.map-head { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:52px; gap:40px; }
+.map-head h2 { font-size:clamp(34px,4vw,50px); }
+.map-wrap {
+  background:var(--navy-mid); border:1px solid var(--grey-dim);
+  padding:36px 36px 28px; position:relative; overflow:hidden;
+}
+.map-wrap::after {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 55% 60% at 65% 45%, rgba(196,162,74,0.05), transparent);
+  pointer-events:none;
+}
+#worldmap { width:100%; height:auto; display:block; }
+.pulse-ring {
+  transform-box:fill-box; transform-origin:center;
+  animation:pring 2.8s ease-in-out infinite;
+}
+@keyframes pring {
+  0%,100% { opacity:0.2; transform:scale(0.7); }
+  50%      { opacity:0.7; transform:scale(1.25); }
+}
+.chips { display:flex; flex-wrap:wrap; gap:10px; margin-top:28px; }
+.chip {
+  font-family:var(--util); font-size:11px; letter-spacing:0.13em;
+  text-transform:uppercase; padding:7px 14px;
+  border:1px solid var(--grey-dim); color:var(--grey);
+}
+.chip.lit { color:var(--gold-lt); border-color:var(--gold-line); background:var(--gold-dim); }
+.map-note { font-size:13px; color:var(--grey); margin-top:18px; max-width:640px; line-height:1.7; }
+
+/* ═══ ASSET CLASSES ═══ */
+.assets-sec { padding:0 var(--pad) clamp(60px,9vw,100px); }
+.assets-panel {
+  background:var(--navy-card); border:1px solid var(--grey-dim);
+  padding:clamp(28px,5vw,56px) clamp(24px,5vw,56px) clamp(28px,4.5vw,48px);
+}
+.assets-head { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:44px; gap:40px; }
+.assets-head h2 { font-family:var(--serif); font-size:clamp(26px,3vw,36px); font-weight:300; line-height:1.1; }
+.assets-head h2 em { font-style:italic; color:var(--gold); }
+.assets-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:1px; width:100%; background:var(--grey-dim); }
+.asset {
+  background:var(--navy-card); padding:30px 22px; text-align:center;
+  transition:background 0.2s;
+}
+.asset:hover { background:var(--navy-hover); }
+.asset svg { width:30px; height:30px; color:var(--gold); margin-bottom:16px; }
+.asset h4 { font-family:var(--util); font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:8px; }
+.asset p { font-size:12px; color:var(--grey); line-height:1.6; }
+
+/* ═══ SERVICES PREVIEW ═══ */
+.svc-sec { padding:clamp(60px,9vw,100px) var(--pad); background:var(--navy-mid); }
+.svc-head { margin-bottom:56px; }
+.svc-head h2 { font-size:clamp(34px,4vw,50px); }
+.svc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; width:100%; background:var(--grey-dim); }
+.svc-card { background:var(--navy-mid); padding:48px 40px; transition:background 0.25s; }
+.svc-card:hover { background:var(--navy-hover); }
+.svc-icon { width:38px; height:38px; color:var(--gold); margin-bottom:26px; }
+.svc-card h3 { font-family:var(--serif); font-size:21px; font-weight:400; margin-bottom:14px; line-height:1.25; }
+.svc-card p  { font-size:14px; color:var(--grey); line-height:1.85; }
+.svc-foot { margin-top:40px; text-align:center; }
+
+/* ═══ HOW WE ENGAGE ═══ */
+.engage-sec { padding:clamp(60px,9vw,100px) var(--pad); }
+.engage-sec h2 { font-size:clamp(34px,4vw,50px); margin-bottom:16px; }
+.engage-sub { max-width:560px; margin-bottom:64px; }
+.timeline { position:relative; display:grid; grid-template-columns:repeat(4,1fr); gap:0; width:100%; }
+.timeline::before {
+  content:''; position:absolute; top:11px; left:calc(12.5% + 11px); right:calc(12.5% + 11px);
+  height:1px; background:linear-gradient(90deg, var(--gold-line), var(--gold), var(--gold-line));
+}
+.t-step { padding:0 28px 0 0; position:relative; }
+.t-dot {
+  width:22px; height:22px; border-radius:50%;
+  border:1px solid var(--gold); background:var(--navy);
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:28px; margin-left:calc(50% - 11px); position:relative; z-index:1;
+}
+.t-dot::after { content:''; width:6px; height:6px; border-radius:50%; background:var(--gold); }
+.t-step { text-align:center; padding:0 18px; }
+.t-num { font-family:var(--util); font-size:11px; letter-spacing:0.22em; color:var(--gold-lt); margin-bottom:10px; }
+.t-step h3 { font-family:var(--serif); font-size:21px; font-weight:400; margin-bottom:12px; }
+.t-step p { font-size:13px; color:var(--grey); line-height:1.8; }
+
+/* ═══ ENGAGEMENT VIGNETTES ═══ */
+.vign-sec { padding:clamp(60px,9vw,100px) var(--pad); background:var(--navy-mid); }
+.vign-sec h2 { font-size:clamp(34px,4vw,50px); margin-bottom:16px; }
+.vign-sub { max-width:560px; margin-bottom:56px; }
+.vign-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; width:100%; }
+.vign {
+  background:var(--navy); border:1px solid var(--grey-dim);
+  border-left:2px solid var(--gold); padding:40px 44px;
+  position:relative;
+}
+.vign-mark { font-family:var(--serif); font-size:54px; color:rgba(196,162,74,0.22); line-height:0.6; display:block; margin-bottom:18px; }
+.vign p { font-family:var(--serif); font-size:19px; font-weight:300; font-style:italic; line-height:1.5; color:var(--white); margin-bottom:18px; }
+.vign span { font-family:var(--util); font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold-lt); }
+
+/* ═══ ETHOS ═══ */
+.ethos-sec { padding:clamp(60px,9vw,100px) var(--pad); }
+.ethos-inner {
+  display:grid; grid-template-columns:1fr 1fr; gap:clamp(36px,6vw,80px); align-items:center; width:100%;
+  background:var(--navy-card); border:1px solid var(--grey-dim); padding:clamp(36px,6vw,80px);
+}
+.ethos-inner h2 { font-size:clamp(32px,3.5vw,46px); }
+.ethos-inner p { font-size:15px; color:var(--grey); line-height:1.85; margin-bottom:22px; }
+.ethos-inner p strong { color:var(--white); font-weight:400; }
+
+.qualifier {
+  margin:0 var(--pad) clamp(60px,9vw,100px); padding:36px 48px;
+  border:1px solid var(--gold-line); background:var(--gold-dim);
+  text-align:center;
+}
+.qualifier p { font-size:14px; color:var(--white); line-height:1.85; max-width:760px; margin:0 auto; }
+.qualifier p em { color:var(--gold); font-style:normal; }
+
+/* ═══ PAGE HERO ═══ */
+.page-hero {
+  min-height:52vh; display:flex; align-items:flex-end;
+  padding:clamp(100px,14vw,150px) var(--pad) clamp(50px,7vw,80px); position:relative; overflow:hidden;
+}
+.page-hero h1 { font-size:clamp(44px,6.2vw,80px); max-width:720px; position:relative; z-index:1; }
+.ph-art { position:absolute; top:0; right:0; width:44%; height:100%; pointer-events:none; opacity:0.6; }
+.ph-art svg { width:100%; height:100%; }
+
+/* ═══ ABOUT ═══ */
+.about-body { padding:clamp(60px,9vw,100px) var(--pad); }
+.ab-grid { display:grid; grid-template-columns:1fr 1fr; gap:clamp(36px,6vw,80px); align-items:start; width:100%; }
+.ab-text p { font-size:15px; color:var(--grey); line-height:1.85; margin-bottom:24px; }
+.ab-text p strong { color:var(--white); font-weight:400; }
+.ab-text .pull {
+  font-family:var(--serif); font-size:22px; font-style:italic; font-weight:300;
+  color:var(--white); line-height:1.5; border-left:2px solid var(--gold);
+  padding:8px 0 8px 28px; margin:34px 0;
+}
+.ab-values { display:grid; gap:20px; width:100%; }
+.val { padding:30px 34px; background:var(--navy-mid); border:1px solid var(--grey-dim); }
+.val h4 { font-family:var(--serif); font-size:21px; font-weight:400; color:var(--gold); margin-bottom:10px; }
+.val p  { font-size:14px; color:var(--grey); line-height:1.8; }
+
+.xp-sec { margin-top:80px; padding-top:80px; border-top:1px solid var(--grey-dim); }
+.xp-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; width:100%; background:var(--grey-dim); margin-top:44px; }
+.xp-item { background:var(--navy); padding:42px 28px; text-align:center; }
+.xp-n { font-family:var(--serif); font-size:48px; font-weight:300; color:var(--gold); margin-bottom:10px; line-height:1; }
+.xp-lbl { font-family:var(--util); font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--grey); line-height:1.7; }
+
+.team-sec { padding:clamp(60px,9vw,100px) var(--pad); background:var(--navy-mid); }
+.team-intro { max-width:620px; margin-bottom:56px; }
+.pillars { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; width:100%; background:var(--grey-dim); }
+.pillar { background:var(--navy-mid); padding:48px 40px; }
+.pillar-lbl { font-family:var(--util); font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-lt); margin-bottom:14px; }
+.pillar h3 { font-family:var(--serif); font-size:24px; font-weight:400; margin-bottom:14px; line-height:1.2; }
+.pillar p  { font-size:14px; color:var(--grey); line-height:1.85; }
+
+/* ═══ SERVICES PAGE ═══ */
+.svcs-body { padding:clamp(50px,8vw,80px) var(--pad) clamp(60px,9vw,100px); }
+.svc-cat { margin-bottom:72px; }
+.cat-hd {
+  display:flex; align-items:center; gap:28px;
+  margin-bottom:36px; padding-bottom:24px; border-bottom:1px solid var(--grey-dim);
+}
+.cat-n { font-family:var(--serif); font-size:62px; font-weight:300; color:rgba(196,162,74,0.18); line-height:1; }
+.cat-info h2 { font-family:var(--serif); font-size:30px; font-weight:400; }
+.cat-info p  { font-size:14px; color:var(--grey); margin-top:4px; }
+.svc-list { display:grid; grid-template-columns:1fr 1fr; gap:2px; width:100%; background:var(--grey-dim); }
+.svc-row { background:var(--navy); padding:40px 42px; transition:background 0.2s; }
+.svc-row:hover { background:var(--navy-mid); }
+.svc-row h3 { font-family:var(--serif); font-size:20px; font-weight:400; margin-bottom:12px; }
+.svc-row p  { font-size:14px; color:var(--grey); line-height:1.85; }
+.svc-tag {
+  display:inline-block; margin-top:16px;
+  font-family:var(--util); font-size:10px; letter-spacing:0.15em;
+  text-transform:uppercase; color:var(--gold-lt);
+  border:1px solid var(--gold-line); padding:4px 10px;
+}
+
+.geo-sec { padding:clamp(60px,9vw,100px) var(--pad); background:var(--navy-mid); }
+.geo-sec h2 { font-size:clamp(34px,4vw,50px); margin-bottom:18px; }
+.geo-lead { max-width:640px; margin-bottom:52px; }
+.geo-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; width:100%; }
+.geo { padding:34px 30px; background:var(--navy); border:1px solid var(--grey-dim); transition:border-color 0.22s; }
+.geo:hover { border-color:var(--gold-line); }
+.geo-rgn { font-family:var(--util); font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-lt); margin-bottom:10px; }
+.geo h3 { font-family:var(--serif); font-size:22px; font-weight:400; margin-bottom:10px; }
+.geo p  { font-size:13px; color:var(--grey); line-height:1.8; }
+
+/* ═══ INSIGHTS ═══ */
+.insights-body { padding:clamp(50px,8vw,80px) var(--pad) clamp(60px,9vw,100px); }
+.ins-grid { display:grid; grid-template-columns:2fr 1fr; gap:clamp(32px,5vw,64px); align-items:start; width:100%; }
+.ins-intro { font-size:15px; color:var(--grey); line-height:1.85; margin-bottom:40px; }
+.art-list { display:grid; gap:2px; width:100%; background:var(--grey-dim); }
+.art {
+  background:var(--navy-mid); padding:40px;
+  display:grid; grid-template-columns:96px 1fr; gap:32px; width:100%;
+  align-items:start; transition:background 0.2s;
+}
+.art:hover { background:var(--navy-hover); }
+.report-cover {
+  width:96px; height:128px; background:var(--navy);
+  border:1px solid var(--gold-line); padding:14px 12px;
+  display:flex; flex-direction:column; gap:7px; flex-shrink:0;
+}
+.rc-brand { font-family:var(--util); font-size:6px; letter-spacing:0.24em; color:var(--gold); }
+.rc-rule { width:18px; height:1px; background:var(--gold); margin:2px 0 4px; }
+.rc-title { height:5px; background:rgba(238,233,224,0.55); width:85%; }
+.rc-title.s { width:60%; }
+.rc-line { height:2.5px; background:rgba(138,144,166,0.3); width:100%; margin-top:2px; }
+.rc-line.s { width:70%; }
+.rc-foot { margin-top:auto; font-family:var(--util); font-size:5px; letter-spacing:0.18em; color:var(--grey); }
+.art-tag { font-family:var(--util); font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold-lt); margin-bottom:12px; }
+.art h3 { font-family:var(--serif); font-size:22px; font-weight:400; margin-bottom:10px; line-height:1.25; }
+.art p  { font-size:14px; color:var(--grey); line-height:1.85; }
+
+.ins-sidebar { display:grid; gap:20px; width:100%; position:sticky; top:110px; }
+.ins-box { background:var(--navy-mid); border:1px solid var(--grey-dim); padding:36px; }
+.ins-box h4 { font-family:var(--serif); font-size:20px; font-weight:400; margin-bottom:16px; }
+.ins-box p  { font-size:14px; color:var(--grey); line-height:1.85; margin-bottom:22px; }
+.topics { display:grid; width:100%; }
+.topic-row { font-size:13px; color:var(--grey); padding:9px 0; border-bottom:1px solid var(--grey-dim); }
+.topic-row:last-child { border-bottom:none; }
+
+/* ═══ CONTACT ═══ */
+.contact-wrap {
+  padding:clamp(100px,14vw,150px) var(--pad) clamp(60px,9vw,100px);
+  display:grid; grid-template-columns:1fr 1fr; gap:clamp(36px,6vw,80px);
+  align-items:start; width:100%;
+}
+.c-title { font-family:var(--serif); font-size:clamp(42px,5.5vw,68px); font-weight:300; line-height:1.08; margin-bottom:22px; letter-spacing:-0.012em; }
+.c-title em { font-style:italic; color:var(--gold); }
+.c-intro { font-size:15px; color:var(--grey); line-height:1.85; margin-bottom:44px; max-width:440px; }
+.c-details { display:grid; gap:30px; width:100%; }
+.c-item-lbl { font-family:var(--util); font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-lt); margin-bottom:6px; }
+.c-item-val { font-size:15px; font-weight:300; }
+.c-item-sub { font-size:13px; color:var(--grey); margin-top:3px; }
+.c-note { margin-top:44px; padding:24px 26px; background:var(--navy-mid); border-left:2px solid var(--gold); }
+.c-note p { font-size:13px; color:var(--grey); line-height:1.85; }
+.c-note p strong { color:var(--white); font-weight:400; }
+
+.c-form { background:var(--navy-mid); border:1px solid var(--grey-dim); padding:clamp(26px,4.5vw,48px); }
+.c-form h2 { font-family:var(--serif); font-size:26px; font-weight:400; margin-bottom:32px; }
+.fgrp { margin-bottom:22px; }
+.flbl { display:block; font-family:var(--util); font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:#C5CADB; margin-bottom:8px; }
+.finp {
+  width:100%; background:var(--navy); border:1px solid var(--grey-dim);
+  color:var(--white); font-family:var(--sans); font-size:14px;
+  padding:13px 15px; outline:none;
+  transition:border-color 0.25s, box-shadow 0.25s;
+}
+.finp:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(196,162,74,0.12); }
+.finp::placeholder { color:var(--grey); opacity:0.65; }
+textarea.finp { resize:vertical; min-height:110px; }
+select.finp { color:var(--grey); appearance:none; cursor:pointer; }
+select.finp option { background:var(--navy-mid); color:var(--white); }
+.f-note { font-size:12px; color:var(--grey); margin-top:14px; line-height:1.7; }
+.f-mailto { display:block; margin-top:16px; font-size:12px; color:var(--grey); text-align:center; }
+.f-mailto a { color:var(--gold); text-decoration:none; }
+.f-confirm {
+  display:none; padding:48px 36px; text-align:center;
+}
+.f-confirm.show { display:block; animation:fadeUp 0.4s ease both; }
+.f-confirm svg { width:46px; height:46px; color:var(--gold); margin-bottom:22px; }
+.f-confirm h3 { font-family:var(--serif); font-size:24px; font-weight:400; margin-bottom:12px; }
+.f-confirm p { font-size:14px; color:var(--grey); line-height:1.85; }
+
+/* What to expect */
+.expect { margin-top:28px; background:var(--navy-mid); border:1px solid var(--grey-dim); padding:34px 36px; }
+.expect h4 { font-family:var(--util); font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-lt); margin-bottom:26px; }
+.expect-row { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; position:relative; width:100%; }
+.expect-row::before { content:''; position:absolute; top:17px; left:12%; right:12%; height:1px; background:var(--grey-dim); }
+.ex-step { text-align:center; position:relative; }
+.ex-ic {
+  width:36px; height:36px; border-radius:50%;
+  background:var(--navy); border:1px solid var(--gold-line);
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto 12px; position:relative; z-index:1;
+}
+.ex-ic svg { width:15px; height:15px; color:var(--gold); }
+.ex-step p { font-size:12px; color:var(--grey); line-height:1.65; }
+.ex-step p strong { display:block; color:var(--white); font-weight:400; font-size:12px; margin-bottom:3px; }
+
+/* FAQ */
+.faq-sec { padding:0 var(--pad) clamp(60px,9vw,100px); }
+.faq-sec h2 { font-size:clamp(32px,4vw,46px); margin-bottom:14px; }
+.faq-lead { max-width:600px; margin-bottom:48px; }
+.faq-list { max-width:860px; }
+.faq {
+  border-bottom:1px solid var(--grey-dim);
+}
+.faq-q {
+  width:100%; text-align:left; background:none; border:none;
+  font-family:var(--serif); font-size:20px; font-weight:400; color:var(--white);
+  padding:26px 48px 26px 0; cursor:pointer; position:relative; outline:none;
+  transition:color 0.2s;
+}
+.faq-q:hover, .faq-q:focus-visible { color:var(--gold-lt); }
+.faq-q::after {
+  content:'+'; position:absolute; right:8px; top:50%;
+  transform:translateY(-50%); font-family:var(--sans); font-weight:300;
+  font-size:24px; color:var(--gold); transition:transform 0.3s;
+}
+.faq.open .faq-q::after { transform:translateY(-50%) rotate(45deg); }
+.faq-a {
+  max-height:0; overflow:hidden; transition:max-height 0.4s ease;
+}
+.faq-a p { font-size:14px; color:var(--grey); line-height:1.9; padding:0 0 28px; max-width:760px; }
+.faq-a p strong { color:var(--white); font-weight:400; }
+
+/* ═══ FOOTER ═══ */
+footer { background:var(--navy-mid); border-top:1px solid var(--grey-dim); padding:clamp(40px,6vw,64px) var(--pad) clamp(28px,4vw,40px); }
+.ft-top { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:56px; width:100%; margin-bottom:48px; }
+.ft-logo { font-family:var(--util); font-size:16px; font-weight:600; letter-spacing:0.2em; margin-bottom:14px; }
+.ft-logo span { color:var(--gold); }
+.ft-tag { font-size:14px; color:var(--grey); line-height:1.8; max-width:260px; }
+.ft-col-h { font-family:var(--util); font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-lt); margin-bottom:18px; }
+.ft-links { list-style:none; display:grid; gap:10px; }
+.ft-links li a { font-size:14px; color:var(--grey); text-decoration:none; cursor:pointer; transition:color 0.2s; outline:none; }
+.ft-links li a:hover, .ft-links li a:focus-visible { color:var(--white); }
+.ft-links li span { font-size:14px; color:var(--grey); }
+.ft-bot { padding-top:28px; border-top:1px solid var(--grey-dim); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; }
+.ft-copy { font-size:11px; color:var(--grey); }
+.ft-leg { display:flex; gap:20px; }
+.ft-leg a { font-size:11px; color:var(--grey); text-decoration:none; cursor:pointer; }
+.ft-leg a:hover { color:var(--white); }
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:960px){
+  .nav-links, nav > .nav-btn { display:none; }
+  .burger { display:flex; }
+  .qualifier { padding:28px 24px; }
+  .ethos-inner { padding:48px 32px; grid-template-columns:1fr; gap:36px; }
+  .ab-grid,.ins-grid,.vign-grid { grid-template-columns:1fr; gap:36px; }
+  .svc-grid,.pillars,.svc-list { grid-template-columns:1fr; }
+  .geo-grid { grid-template-columns:1fr; }
+  .stats-row { grid-template-columns:1fr 1fr; }
+  .xp-grid { grid-template-columns:1fr 1fr; }
+  .assets-grid { grid-template-columns:repeat(3,1fr); }
+  .assets-head { flex-direction:column; align-items:flex-start; gap:18px; }
+  .contact-wrap { grid-template-columns:1fr; }
+  .ft-top { grid-template-columns:1fr 1fr; gap:36px; }
+  .map-head { flex-direction:column; align-items:flex-start; gap:20px; }
+  .timeline { grid-template-columns:1fr 1fr; gap:36px 0; }
+  .timeline::before { display:none; }
+  .art { grid-template-columns:1fr; }
+  .report-cover { display:none; }
+  .hero-art svg { opacity:0.45; }
+  .ins-sidebar { position:static; }
+}
+@media(max-width:560px){
+  .stats-row, .xp-grid { grid-template-columns:1fr; }
+  .stat { padding:26px 22px; }
+  .stat-n { font-size:40px; }
+  .assets-grid { grid-template-columns:1fr 1fr; }
+  .timeline { grid-template-columns:1fr; gap:28px; }
+  .t-step { text-align:left; padding:0; }
+  .t-dot { margin-left:0; }
+  .expect-row { grid-template-columns:1fr 1fr; gap:24px 10px; }
+  .expect-row::before { display:none; }
+  .ft-top { grid-template-columns:1fr; }
+  .vign { padding:28px 24px; }
+  .vign p { font-size:17px; }
+  .ethos-inner h2, .engage-sec h2, .vign-sec h2 { font-size:30px; }
+  .faq-q { font-size:17px; padding-right:40px; }
+  .cat-hd { gap:18px; }
+  .cat-n { font-size:44px; }
+  .svc-row, .svc-card, .pillar { padding:30px 24px; }
+  .hero { min-height:88vh; }
+  .hero-coord { display:none; }
+  .hero-photo { background-position:60% center; background-size:cover; }
+  .map-wrap { padding:18px 14px 14px; }
+  .c-title { font-size:38px; }
+  .drawer { width:min(280px, 84vw); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pulse-ring { animation:none; opacity:0.4; }
+  html { scroll-behavior:auto; }
+}
+
+/* Safari grid/flex fix — prevent content-based shrinkage */
+.stat,.svc-card,.svc-row,.asset,.pillar,.geo,.xp-item,
+.t-step,.vign,.art,.ins-box,.faq,.ft-top>div,
+.c-form,.expect,.ex-step,.topic-row,.vign-grid>*,
+.ab-grid>*,.ethos-inner>*,.ins-grid>* { min-width:0; }
+
+/* Ensure all sections span full viewport width */
+.hero,.stats-wrap,.map-sec,.assets-sec,.svc-sec,
+.engage-sec,.vign-sec,.ethos-sec,.qualifier,
+.about-body,.team-sec,.svcs-body,.geo-sec,
+.insights-body,.contact-wrap,.faq-sec,footer { width:100%; }
+
+/* Safari: block-level containers need explicit width */
+.map-wrap,.assets-panel,.ethos-inner,.c-form,.expect,
+.faq-list { width:100%; }
+
+/* Flex containers: prevent collapsing on Safari */
+.hero-ctas,.chips,.nav-links,.ft-bot,.ft-leg { flex-shrink:0; }
+.chips { width:100%; }
+
+
+/* ── Modals ── */
+.modal-bg {
+  position:fixed; inset:0; z-index:900;
+  background:rgba(8,12,24,0.88); backdrop-filter:blur(8px);
+  display:none; align-items:center; justify-content:center;
+  padding:clamp(20px,4vw,60px);
+}
+.modal-bg.open { display:flex; animation:fadeUp 0.3s ease both; }
+.modal-box {
+  background:var(--navy-mid); border:1px solid var(--grey-dim);
+  max-width:760px; width:100%; max-height:82vh;
+  overflow-y:auto; padding:clamp(32px,5vw,60px);
+  position:relative;
+}
+.modal-close {
+  position:sticky; top:0; float:right; margin:-8px -8px 12px 16px;
+  background:none; border:none; color:var(--grey);
+  font-size:28px; line-height:1; cursor:pointer; z-index:10;
+  transition:color 0.2s;
+}
+.modal-close:hover { color:var(--white); }
+.modal-box h2 { font-family:var(--serif); font-size:clamp(26px,3vw,36px); font-weight:300; margin-bottom:8px; }
+.modal-box .modal-date { font-family:var(--util); font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold-lt); margin-bottom:32px; display:block; }
+.modal-box h3 { font-family:var(--serif); font-size:20px; font-weight:400; color:var(--white); margin:32px 0 10px; }
+.modal-box p  { font-size:14px; color:var(--grey); line-height:1.9; margin-bottom:14px; }
+.modal-box p strong { color:var(--white); font-weight:400; }
+.modal-box ul { padding-left:20px; margin-bottom:14px; }
+.modal-box ul li { font-size:14px; color:var(--grey); line-height:1.85; margin-bottom:6px; }
+
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- ════ NAV ════ -->
+<nav id="nav">
+  <span class="logo" data-go="home" tabindex="0" role="link">YUKTI<span>.</span></span>
+  <ul class="nav-links">
+    <li><a id="n-home" class="on" data-go="home" tabindex="0" role="link">Home</a></li>
+    <li><a id="n-about"    data-go="about" tabindex="0" role="link">About</a></li>
+    <li><a id="n-services" data-go="services" tabindex="0" role="link">Services</a></li>
+    <li><a id="n-insights" data-go="insights" tabindex="0" role="link">Insights</a></li>
+    <li><a id="n-contact"  data-go="contact" tabindex="0" role="link">Contact</a></li>
+  </ul>
+  <button class="nav-btn" data-go="contact">Get in Touch</button>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Mobile navigation">
+  <button class="drawer-close" id="drawerClose" aria-label="Close menu">×</button>
+  <a id="d-home" data-go="home" tabindex="0" role="link">Home</a>
+  <a id="d-about" data-go="about" tabindex="0" role="link">About</a>
+  <a id="d-services" data-go="services" tabindex="0" role="link">Services</a>
+  <a id="d-insights" data-go="insights" tabindex="0" role="link">Insights</a>
+  <a id="d-contact" data-go="contact" tabindex="0" role="link">Contact</a>
+  <button class="nav-btn" data-go="contact">Get in Touch</button>
+</aside>
+
+<!-- ════════════════════════════════════════
+     HOME
+════════════════════════════════════════ -->
+<div id="p-home" class="page on">
+
+  <section class="hero">
+    <div class="hero-photo" aria-hidden="true"></div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 800 900" preserveAspectRatio="xMaxYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bldg1" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0" stop-color="#0D1322"/><stop offset="1" stop-color="#141B2E"/>
+          </linearGradient>
+          <linearGradient id="bldg2" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0" stop-color="#0A0F1D"/><stop offset="1" stop-color="#111726"/>
+          </linearGradient>
+          <linearGradient id="skyfade" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#080C18" stop-opacity="0"/><stop offset="1" stop-color="#080C18"/>
+          </linearGradient>
+        </defs>
+        <!-- Converging tower facades, low-angle perspective -->
+        <polygon points="230,900 330,900 360,80 300,60" fill="url(#bldg1)" stroke="rgba(196,162,74,0.14)" stroke-width="1"/>
+        <polygon points="360,900 470,900 460,40 380,55" fill="url(#bldg2)" stroke="rgba(196,162,74,0.18)" stroke-width="1"/>
+        <polygon points="500,900 620,900 580,110 500,90" fill="url(#bldg1)" stroke="rgba(196,162,74,0.14)" stroke-width="1"/>
+        <polygon points="640,900 780,900 700,170 630,150" fill="url(#bldg2)" stroke="rgba(196,162,74,0.12)" stroke-width="1"/>
+        <polygon points="120,900 215,900 250,200 190,190" fill="url(#bldg2)" stroke="rgba(196,162,74,0.1)" stroke-width="1"/>
+        <!-- Facade mullion lines -->
+        <g stroke="rgba(196,162,74,0.07)" stroke-width="0.7">
+          <line x1="262" y1="880" x2="318" y2="90"/><line x1="296" y1="890" x2="338" y2="75"/>
+          <line x1="392" y1="890" x2="404" y2="55"/><line x1="425" y1="895" x2="430" y2="48"/><line x1="450" y1="895" x2="448" y2="45"/>
+          <line x1="535" y1="895" x2="525" y2="100"/><line x1="572" y1="897" x2="552" y2="105"/><line x1="600" y1="898" x2="568" y2="108"/>
+          <line x1="680" y1="898" x2="655" y2="160"/><line x1="725" y1="899" x2="678" y2="165"/>
+          <line x1="150" y1="898" x2="210" y2="195"/><line x1="183" y1="899" x2="230" y2="198"/>
+        </g>
+        <!-- Floor lines -->
+        <g stroke="rgba(196,162,74,0.05)" stroke-width="0.6" id="floors"></g>
+        <!-- Lit windows -->
+        <g fill="rgba(217,187,110,0.5)" id="windows">
+          <rect x="402" y="180" width="8" height="5"/><rect x="418" y="240" width="8" height="5"/>
+          <rect x="395" y="340" width="8" height="5"/><rect x="430" y="410" width="8" height="5"/>
+          <rect x="410" y="520" width="8" height="5"/><rect x="440" y="610" width="9" height="5"/>
+          <rect x="398" y="700" width="9" height="6"/><rect x="425" y="780" width="9" height="6"/>
+          <rect x="285" y="220" width="7" height="4"/><rect x="305" y="360" width="7" height="5"/>
+          <rect x="290" y="490" width="8" height="5"/><rect x="315" y="640" width="8" height="5"/>
+          <rect x="300" y="770" width="9" height="6"/>
+          <rect x="528" y="260" width="8" height="5"/><rect x="548" y="380" width="8" height="5"/>
+          <rect x="536" y="500" width="8" height="5"/><rect x="565" y="630" width="9" height="5"/>
+          <rect x="550" y="760" width="9" height="6"/>
+          <rect x="660" y="300" width="8" height="5"/><rect x="690" y="450" width="9" height="5"/>
+          <rect x="672" y="590" width="9" height="6"/><rect x="710" y="720" width="10" height="6"/>
+          <rect x="205" y="330" width="7" height="4"/><rect x="190" y="480" width="7" height="5"/>
+          <rect x="178" y="630" width="8" height="5"/><rect x="165" y="760" width="8" height="6"/>
+        </g>
+        <rect x="0" y="0" width="800" height="240" fill="url(#skyfade)" transform="rotate(180 400 120)"/>
+      </svg>
+    </div>
+    <div class="hero-fade"></div>
+    <span class="hero-coord">1.3521°N · 103.8198°E</span>
+    <div class="hero-inner">
+      <p class="eyebrow hero-stagger-1" style="margin-bottom:20px;">Singapore · Independent Real Estate Advisory</p>
+      <h1 class="display hero-stagger-2">The World's Real Estate Markets, <em>Understood.</em></h1>
+      <p class="sub lead hero-stagger-3">Yukti is a Singapore-based independent advisory firm. We provide institutional and private capital with the intelligence, analysis, and deal support to invest in global real estate with conviction.</p>
+      <div class="hero-ctas hero-stagger-4">
+        <a class="btn-fill" data-go="services" tabindex="0" role="link">Our Services</a>
+        <a class="btn-ghost-link" data-go="about" tabindex="0" role="link">About Yukti</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-wrap">
+    <div class="stats-rule"></div>
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-n">40<sup>+</sup></div>
+        <div class="stat-lbl">Years of Real Estate<br>Experience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">15<sup>+</sup></div>
+        <div class="stat-lbl">Markets Under<br>Active Coverage</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">6</div>
+        <div class="stat-lbl">Core Asset<br>Classes</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">5</div>
+        <div class="stat-lbl">Regions of<br>Coverage</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Map -->
+  <section class="map-sec">
+    <div class="map-head">
+      <div>
+        <p class="eyebrow">Geographic Coverage</p>
+        <div class="rule"></div>
+        <h2 class="display">Advisory Across<br><em>Five Regions</em></h2>
+      </div>
+      <p class="body-copy" style="max-width:360px;">From Singapore, Yukti delivers market intelligence and deal advisory spanning Asia-Pacific, the Middle East, Europe, the Americas, and South Asia — following our clients' capital wherever it is deployed.</p>
+    </div>
+    <div class="map-wrap">
+      <svg id="worldmap" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dotted world map showing Yukti's five regions of coverage"></svg>
+    </div>
+    <div class="chips">
+      <span class="chip lit">Asia-Pacific</span>
+      <span class="chip lit">Middle East &amp; the Gulf</span>
+      <span class="chip lit">Europe</span>
+      <span class="chip lit">The Americas</span>
+      <span class="chip lit">South Asia</span>
+    </div>
+    <p class="map-note">Markers indicate regions of active coverage, not the limits of our mandate. Within each region we maintain depth in the principal investment markets — and our advisory follows opportunity beyond them.</p>
+  </section>
+
+  <!-- Asset classes -->
+  <section class="assets-sec">
+    <div class="assets-panel">
+      <div class="assets-head">
+        <div>
+          <p class="eyebrow">Asset Coverage</p>
+          <div class="rule" style="margin-bottom:0;"></div>
+        </div>
+        <h2>Six Core <em>Asset Classes</em></h2>
+      </div>
+      <div class="assets-grid">
+        <div class="asset">
+          <svg viewBox="0 0 30 30" fill="none"><rect x="5" y="3" width="20" height="24" stroke="currentColor" stroke-width="1.2"/><line x1="5" y1="9" x2="25" y2="9" stroke="currentColor" stroke-width="0.8"/><line x1="5" y1="15" x2="25" y2="15" stroke="currentColor" stroke-width="0.8"/><line x1="5" y1="21" x2="25" y2="21" stroke="currentColor" stroke-width="0.8"/><line x1="12" y1="3" x2="12" y2="27" stroke="currentColor" stroke-width="0.8"/><line x1="19" y1="3" x2="19" y2="27" stroke="currentColor" stroke-width="0.8"/></svg>
+          <h4>Commercial</h4>
+          <p>Office, retail &amp; mixed-use</p>
+        </div>
+        <div class="asset">
+          <svg viewBox="0 0 30 30" fill="none"><path d="M4 14 L15 5 L26 14" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M7 12 V26 H23 V12" stroke="currentColor" stroke-width="1.2" fill="none"/><rect x="12.5" y="18" width="5" height="8" stroke="currentColor" stroke-width="0.9"/></svg>
+          <h4>Residential</h4>
+          <p>Prime &amp; yield-driven</p>
+        </div>
+        <div class="asset">
+          <svg viewBox="0 0 30 30" fill="none"><rect x="4" y="8" width="22" height="18" stroke="currentColor" stroke-width="1.2"/><line x1="4" y1="13" x2="26" y2="13" stroke="currentColor" stroke-width="0.8"/><circle cx="9" cy="19" r="1.4" fill="currentColor"/><circle cx="15" cy="19" r="1.4" fill="currentColor"/><circle cx="21" cy="19" r="1.4" fill="currentColor"/><path d="M11 8 V5 H19 V8" stroke="currentColor" stroke-width="1"/></svg>
+          <h4>Hospitality</h4>
+          <p>Hotels &amp; serviced living</p>
+        </div>
+        <div class="asset">
+          <svg viewBox="0 0 30 30" fill="none"><path d="M3 26 V13 L10 9 V13 L17 9 V13 L24 9 V26 Z" stroke="currentColor" stroke-width="1.2" fill="none"/><rect x="7" y="18" width="4" height="5" stroke="currentColor" stroke-width="0.8"/><rect x="14" y="18" width="4" height="5" stroke="currentColor" stroke-width="0.8"/></svg>
+          <h4>Industrial</h4>
+          <p>Logistics &amp; warehousing</p>
+        </div>
+        <div class="asset">
+          <svg viewBox="0 0 30 30" fill="none"><rect x="5" y="5" width="20" height="20" stroke="currentColor" stroke-width="1.2"/><line x1="5" y1="12" x2="25" y2="12" stroke="currentColor" stroke-width="0.8"/><line x1="5" y1="18" x2="25" y2="18" stroke="currentColor" stroke-width="0.8"/><circle cx="10" cy="8.5" r="1" fill="currentColor"/><circle cx="14" cy="8.5" r="1" fill="currentColor"/><circle cx="10" cy="15" r="1" fill="currentColor"/><circle cx="14" cy="15" r="1" fill="currentColor"/><circle cx="18" cy="15" r="1" fill="currentColor"/></svg>
+          <h4>Specialty</h4>
+          <p>Data centres, life sciences, student &amp; senior living</p>
+        </div>
+        <div class="asset">
+          <svg viewBox="0 0 30 30" fill="none"><path d="M3 24 L10 16 L16 20 L27 8" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M3 27 H27" stroke="currentColor" stroke-width="1.2"/><circle cx="27" cy="8" r="1.6" fill="currentColor"/></svg>
+          <h4>Land &amp; Dev.</h4>
+          <p>Development &amp; repositioning</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services preview -->
+  <section class="svc-sec">
+    <div class="svc-head">
+      <p class="eyebrow">What We Do</p>
+      <div class="rule"></div>
+      <h2 class="display">Advisory Built for<br><em>Institutional Capital</em></h2>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card">
+        <svg class="svc-icon" viewBox="0 0 38 38" fill="none"><rect x="3" y="3" width="32" height="32" stroke="currentColor" stroke-width="1.4"/><line x1="3" y1="13" x2="35" y2="13" stroke="currentColor" stroke-width="0.9"/><line x1="3" y1="25" x2="35" y2="25" stroke="currentColor" stroke-width="0.9"/><line x1="13" y1="3" x2="13" y2="35" stroke="currentColor" stroke-width="0.9"/></svg>
+        <h3>Research &amp; Intelligence</h3>
+        <p>Proprietary market research covering fundamentals, pricing, supply-demand dynamics, and macro outlook across our coverage universe — built on primary sources and direct market relationships.</p>
+      </div>
+      <div class="svc-card">
+        <svg class="svc-icon" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="14" stroke="currentColor" stroke-width="1.4"/><line x1="19" y1="5" x2="19" y2="33" stroke="currentColor" stroke-width="0.9"/><line x1="5" y1="19" x2="33" y2="19" stroke="currentColor" stroke-width="0.9"/><path d="M8 10 Q19 19 30 10" stroke="currentColor" stroke-width="0.9" fill="none"/><path d="M8 28 Q19 19 30 28" stroke="currentColor" stroke-width="0.9" fill="none"/></svg>
+        <h3>Cross-Border Deal Advisory</h3>
+        <p>End-to-end support on international acquisitions — from preliminary screening and site inspections through to negotiation support and commercial review of transaction terms.</p>
+      </div>
+      <div class="svc-card">
+        <svg class="svc-icon" viewBox="0 0 38 38" fill="none"><path d="M6 34 L6 16 L19 8 L32 16 L32 34Z" stroke="currentColor" stroke-width="1.4" fill="none"/><rect x="14" y="24" width="10" height="10" stroke="currentColor" stroke-width="0.9"/><rect x="10" y="18" width="6" height="6" stroke="currentColor" stroke-width="0.9"/><rect x="22" y="18" width="6" height="6" stroke="currentColor" stroke-width="0.9"/></svg>
+        <h3>Portfolio Advisory</h3>
+        <p>Strategic support for global real estate portfolios — asset performance reviews, positioning analysis, and investment thesis development on an ongoing, structured basis.</p>
+      </div>
+      <div class="svc-card">
+        <svg class="svc-icon" viewBox="0 0 38 38" fill="none"><path d="M4 28 L14 17 L22 22 L33 9" stroke="currentColor" stroke-width="1.4" fill="none"/><circle cx="4" cy="28" r="2" fill="currentColor"/><circle cx="14" cy="17" r="2" fill="currentColor"/><circle cx="22" cy="22" r="2" fill="currentColor"/><circle cx="33" cy="9" r="2" fill="currentColor"/></svg>
+        <h3>Transaction Due Diligence</h3>
+        <p>Independent commercial due diligence for acquisitions and disposals — covering market fundamentals, comparable evidence, asset quality, risk factors, and investment rationale.</p>
+      </div>
+      <div class="svc-card">
+        <svg class="svc-icon" viewBox="0 0 38 38" fill="none"><rect x="4" y="8" width="30" height="26" rx="1" stroke="currentColor" stroke-width="1.4"/><line x1="4" y1="16" x2="34" y2="16" stroke="currentColor" stroke-width="0.9"/><circle cx="19" cy="26" r="5" stroke="currentColor" stroke-width="0.9"/><line x1="19" y1="21" x2="19" y2="16" stroke="currentColor" stroke-width="0.9"/></svg>
+        <h3>Investment Memos &amp; Thesis</h3>
+        <p>Structured investment memoranda and sector thesis papers tailored to specific markets and asset classes — designed to inform capital allocation and long-term strategy.</p>
+      </div>
+      <div class="svc-card">
+        <svg class="svc-icon" viewBox="0 0 38 38" fill="none"><circle cx="13" cy="15" r="5.5" stroke="currentColor" stroke-width="1.4"/><circle cx="25" cy="15" r="5.5" stroke="currentColor" stroke-width="1.4"/><path d="M4 34 Q4 25 13 25 Q19 25 19 25 Q19 25 25 25 Q34 25 34 34" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+        <h3>Network &amp; Introductions</h3>
+        <p>Access to Yukti's curated network of developers, brokers, asset managers, and capital partners across our regions of coverage, facilitated where commercially appropriate.</p>
+      </div>
+    </div>
+    <div class="svc-foot">
+      <a class="btn-fill" data-go="services" tabindex="0" role="link">View All Services</a>
+    </div>
+  </section>
+
+  <!-- How we engage -->
+  <section class="engage-sec">
+    <p class="eyebrow">How We Engage</p>
+    <div class="rule"></div>
+    <h2 class="display">A Deliberate Path<br><em>From Enquiry to Mandate</em></h2>
+    <p class="engage-sub lead">Every relationship begins the same way: a conversation, held in confidence, with no obligation on either side.</p>
+    <div class="timeline">
+      <div class="t-step">
+        <div class="t-dot"></div>
+        <p class="t-num">STEP 01</p>
+        <h3>Initial Conversation</h3>
+        <p>A confidential discussion of your mandate, portfolio, and objectives — so both sides can judge the fit.</p>
+      </div>
+      <div class="t-step">
+        <div class="t-dot"></div>
+        <p class="t-num">STEP 02</p>
+        <h3>Scoping &amp; Proposal</h3>
+        <p>Scope, deliverables, and fee structure defined in writing — precisely, before any work begins.</p>
+      </div>
+      <div class="t-step">
+        <div class="t-dot"></div>
+        <p class="t-num">STEP 03</p>
+        <h3>Engagement</h3>
+        <p>A retainer relationship, a project mandate, or both — formalised under a Master Services Agreement.</p>
+      </div>
+      <div class="t-step">
+        <div class="t-dot"></div>
+        <p class="t-num">STEP 04</p>
+        <h3>Ongoing Advisory</h3>
+        <p>Reports, reviews, and on-demand counsel as your deployment evolves. Most relationships deepen over years, not quarters.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Representative engagements -->
+  <section class="vign-sec">
+    <p class="eyebrow">Representative Engagements</p>
+    <div class="rule"></div>
+    <h2 class="display">The Work,<br><em>Anonymised</em></h2>
+    <p class="vign-sub lead">Client identities and transaction specifics are held in strict confidence. These vignettes illustrate the nature and scale of our mandates.</p>
+    <div class="vign-grid">
+      <div class="vign">
+        <span class="vign-mark">"</span>
+        <p>Commercial acquisition due diligence across three European markets for an Asia-based family group — transaction value in excess of SGD 50 million.</p>
+        <span>Transaction Diligence · Europe</span>
+      </div>
+      <div class="vign">
+        <span class="vign-mark">"</span>
+        <p>Market-entry analysis for a Gulf-based hospitality portfolio expanding into Southern European resort and urban markets.</p>
+        <span>Market Entry · Middle East → Europe</span>
+      </div>
+      <div class="vign">
+        <span class="vign-mark">"</span>
+        <p>Ongoing quarterly portfolio advisory for a multi-jurisdiction conglomerate holding real estate across Asia-Pacific and the Americas.</p>
+        <span>Portfolio Advisory · Global</span>
+      </div>
+      <div class="vign">
+        <span class="vign-mark">"</span>
+        <p>Negotiation support and commercial review of transaction documents on a cross-border mixed-use development joint venture.</p>
+        <span>Deal Support · Cross-Border</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ethos -->
+  <section class="ethos-sec">
+    <div class="ethos-inner">
+      <div>
+        <p class="eyebrow">The Yukti Approach</p>
+        <div class="rule"></div>
+        <h2 class="display">Independent Advisory.<br><em>No Conflicts.</em><br>Absolute Conviction.</h2>
+      </div>
+      <div>
+        <p>Yukti is structured to have nothing to sell you but judgement. <strong>No brokerage. No fund management. No principal positions.</strong> Every incentive in the firm points the same direction our clients' interests do.</p>
+        <p>We work with a small number of institutional and private capital partners, in strict confidence, with the analytical rigour their capital deserves. When our advice is inconvenient, we give it anyway. That is the point of independence.</p>
+        <a class="btn-fill" data-go="contact" tabindex="0" role="link">Begin a Conversation</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="qualifier">
+    <p>Yukti works with <em>family offices, conglomerates, and institutional investors</em> deploying capital into global real estate. We do not work with retail investors or property developers seeking capital.</p>
+  </div>
+
+  <footer>
+    <div class="ft-top">
+      <div>
+        <div class="ft-logo">YUKTI<span>.</span></div>
+        <p class="ft-tag">Singapore-based independent real estate advisory for institutional and private capital across global markets.</p>
+        <p style="font-size:12px;color:var(--grey);margin-top:14px;line-height:1.75;">Yukti Trading Pte Ltd<br>UEN 202517859W<br>80 Raffles Place, #14-01, UOB Plaza<br>Singapore 048624</p>
+      </div>
+      <div>
+        <p class="ft-col-h">Navigate</p>
+        <ul class="ft-links">
+          <li><a data-go="home" tabindex="0" role="link">Home</a></li>
+          <li><a data-go="about" tabindex="0" role="link">About</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Services</a></li>
+          <li><a data-go="insights" tabindex="0" role="link">Insights</a></li>
+          <li><a data-go="contact" tabindex="0" role="link">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="ft-col-h">Services</p>
+        <ul class="ft-links">
+          <li><a data-go="services" tabindex="0" role="link">Research &amp; Reports</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Deal Advisory</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Due Diligence</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Portfolio Reviews</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Introductions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="ft-col-h">Contact</p>
+        <ul class="ft-links">
+          <li><a href="mailto:sales@yukti.sg">sales@yukti.sg</a></li>
+          <li><span>+65 XXXX XXXX</span></li>
+        </ul>
+
+      </div>
+    </div>
+    <div class="ft-bot">
+      <p class="ft-copy">© 2026 Yukti Trading Pte Ltd · UEN 202517859W · Incorporated in Singapore. All rights reserved.</p>
+      <div class="ft-leg">
+        <a data-modal="privacy" tabindex="0" role="button" style="cursor:pointer;">Privacy Policy</a>
+        <a data-modal="disclaimer" tabindex="0" role="button" style="cursor:pointer;">Disclaimer</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     ABOUT
+════════════════════════════════════════ -->
+<div id="p-about" class="page">
+  <section class="page-hero">
+    <div class="ph-art" aria-hidden="true">
+      <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice"><g stroke="rgba(196,162,74,0.1)" stroke-width="0.7" fill="none"><polygon points="80,500 160,500 180,60 120,50"/><polygon points="200,500 300,500 280,100 210,90"/><line x1="110" y1="480" x2="150" y2="70"/><line x1="135" y1="490" x2="168" y2="62"/><line x1="235" y1="490" x2="240" y2="95"/><line x1="265" y1="495" x2="262" y2="98"/></g><g fill="rgba(217,187,110,0.4)"><rect x="142" y="180" width="6" height="4"/><rect x="128" y="320" width="6" height="4"/><rect x="248" y="240" width="6" height="4"/><rect x="232" y="400" width="7" height="4"/></g></svg>
+    </div>
+    <div>
+      <p class="eyebrow">About Yukti</p>
+      <div class="rule"></div>
+      <h1 class="display">Decades of Expertise.<br><em>One Singular Focus.</em></h1>
+    </div>
+  </section>
+
+  <section class="about-body">
+    <div class="ab-grid">
+      <div class="ab-text">
+        <p class="eyebrow">Our Story</p>
+        <div class="rule"></div>
+        <p><strong>Yukti Trading Pte Ltd</strong> is a Singapore-incorporated real estate advisory firm established to serve institutional and private capital deploying into global real estate markets.</p>
+        <p class="pull">Yukti was founded on a simple observation: the best real estate advice and the biggest commercial incentives rarely sit in the same room. We built a firm where they never have to.</p>
+        <p>The Yukti team brings together over <strong>40 years of real estate experience</strong> spanning advisory, deal origination, market research, and portfolio strategy across Asia-Pacific, the Middle East, Europe, the Americas, and South Asia. Our advisory work is grounded in direct market exposure — our advisors have been involved in transactions, fund structures, and investment analysis across more than fifteen markets worldwide.</p>
+        <p>The firm operates from Singapore, one of the world's foremost financial centres, leveraging the city-state's position as the hub connecting Asian and Middle Eastern capital with property markets globally.</p>
+        <p>Yukti works with a select group of institutional clients and family capital groups on a retainer and project basis. We do not manage funds, hold brokerage licences, or take principal positions — our independence is the foundation of the trust our clients place in us.</p>
+      </div>
+      <div class="ab-values">
+        <div class="val">
+          <h4>Independence</h4>
+          <p>No brokerage. No fund management. No co-investment interests. Yukti's advice is free of the conflicts that compromise most advisory relationships in real estate.</p>
+        </div>
+        <div class="val">
+          <h4>Precision</h4>
+          <p>We deal in facts, data, and rigorous analysis — built on primary research, direct market intelligence, and decades of deal experience. Not recycled commentary.</p>
+        </div>
+        <div class="val">
+          <h4>Discretion</h4>
+          <p>We work quietly. Client relationships, mandates, and transaction details are held in strict confidence. Our clients value this as much as our analytical capability.</p>
+        </div>
+        <div class="val">
+          <h4>Long-Term Partnership</h4>
+          <p>Our engagements are structured around enduring advisory relationships, not transaction-driven incentives. Our success is measured by the quality of our clients' outcomes.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="xp-sec">
+      <p class="eyebrow">By the Numbers</p>
+      <div class="xp-grid">
+        <div class="xp-item">
+          <div class="xp-n">40<span style="font-size:22px;">+</span></div>
+          <div class="xp-lbl">Years of Real Estate<br>Experience</div>
+        </div>
+        <div class="xp-item">
+          <div class="xp-n">15<span style="font-size:22px;">+</span></div>
+          <div class="xp-lbl">Markets Under<br>Active Coverage</div>
+        </div>
+        <div class="xp-item">
+          <div class="xp-n">6</div>
+          <div class="xp-lbl">Core Asset<br>Classes</div>
+        </div>
+        <div class="xp-item">
+          <div class="xp-n">5</div>
+          <div class="xp-lbl">Regions of<br>Coverage</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-sec">
+    <div class="team-intro">
+      <p class="eyebrow">Our Expertise</p>
+      <div class="rule"></div>
+      <h2 class="display">Three Pillars of<br><em>Our Practice</em></h2>
+      <p class="lead" style="margin-top:20px;">Yukti's advisory capability rests on three disciplines, developed through decades of practical work in real estate investment markets worldwide.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <p class="pillar-lbl">Discipline 01</p>
+        <h3>Market Intelligence</h3>
+        <p>Proprietary research and direct market intelligence across global property markets — from fundamentals and pricing to macro drivers and capital flow dynamics. Built through years of on-the-ground presence and primary relationships with market participants.</p>
+      </div>
+      <div class="pillar">
+        <p class="pillar-lbl">Discipline 02</p>
+        <h3>Transaction Advisory</h3>
+        <p>Hands-on deal support across the transaction lifecycle — from initial screening and asset identification to due diligence, negotiation, and commercial structuring. Experience spanning acquisitions, joint ventures, and portfolio transactions across multiple jurisdictions.</p>
+      </div>
+      <div class="pillar">
+        <p class="pillar-lbl">Discipline 03</p>
+        <h3>Portfolio Strategy</h3>
+        <p>Strategic advisory for institutional and private capital managing global real estate portfolios — asset allocation, diversification strategy, performance analysis, and long-term positioning across geographies, asset classes, and capital structures.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="qualifier" style="margin-top:100px;">
+    <p>Yukti works with <em>family offices, conglomerates, and institutional investors</em> deploying capital into global real estate. We do not work with retail investors or property developers seeking capital.</p>
+  </div>
+
+  <footer>
+    <div class="ft-top">
+      <div>
+        <div class="ft-logo">YUKTI<span>.</span></div>
+        <p class="ft-tag">Singapore-based independent real estate advisory for institutional and private capital across global markets.</p>
+        <p style="font-size:12px;color:var(--grey);margin-top:14px;line-height:1.75;">Yukti Trading Pte Ltd<br>UEN 202517859W<br>80 Raffles Place, #14-01, UOB Plaza<br>Singapore 048624</p>
+      </div>
+      <div>
+        <p class="ft-col-h">Navigate</p>
+        <ul class="ft-links">
+          <li><a data-go="home" tabindex="0" role="link">Home</a></li>
+          <li><a data-go="about" tabindex="0" role="link">About</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Services</a></li>
+          <li><a data-go="insights" tabindex="0" role="link">Insights</a></li>
+          <li><a data-go="contact" tabindex="0" role="link">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="ft-col-h">Services</p>
+        <ul class="ft-links">
+          <li><a data-go="services" tabindex="0" role="link">Research &amp; Reports</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Deal Advisory</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Due Diligence</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Portfolio Reviews</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Introductions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="ft-col-h">Contact</p>
+        <ul class="ft-links">
+          <li><a href="mailto:sales@yukti.sg">sales@yukti.sg</a></li>
+          <li><span>+65 XXXX XXXX</span></li>
+        </ul>
+
+      </div>
+    </div>
+    <div class="ft-bot">
+      <p class="ft-copy">© 2026 Yukti Trading Pte Ltd · UEN 202517859W · Incorporated in Singapore. All rights reserved.</p>
+      <div class="ft-leg">
+        <a data-modal="privacy" tabindex="0" role="button" style="cursor:pointer;">Privacy Policy</a>
+        <a data-modal="disclaimer" tabindex="0" role="button" style="cursor:pointer;">Disclaimer</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     SERVICES
+════════════════════════════════════════ -->
+<div id="p-services" class="page">
+  <section class="page-hero">
+    <div class="ph-art" aria-hidden="true">
+      <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice"><g stroke="rgba(196,162,74,0.08)" stroke-width="0.7" fill="none"><line x1="40" y1="0" x2="40" y2="500"/><line x1="110" y1="0" x2="110" y2="500"/><line x1="180" y1="0" x2="180" y2="500"/><line x1="250" y1="0" x2="250" y2="500"/><line x1="320" y1="0" x2="320" y2="500"/><line x1="0" y1="90" x2="400" y2="90"/><line x1="0" y1="200" x2="400" y2="200"/><line x1="0" y1="310" x2="400" y2="310"/><line x1="0" y1="420" x2="400" y2="420"/></g><g fill="rgba(196,162,74,0.18)"><circle cx="110" cy="200" r="3"/><circle cx="250" cy="90" r="3"/><circle cx="180" cy="310" r="3"/><circle cx="320" cy="420" r="3"/></g></svg>
+    </div>
+    <div>
+      <p class="eyebrow">Services</p>
+      <div class="rule"></div>
+      <h1 class="display">Advisory Services for<br><em>Global Real Estate</em></h1>
+    </div>
+  </section>
+
+  <section class="svcs-body">
+
+    <div class="svc-cat">
+      <div class="cat-hd">
+        <div class="cat-n">01</div>
+        <div class="cat-info">
+          <h2>Core Advisory</h2>
+          <p>Retainer-based strategic advisory and written research deliverables</p>
+        </div>
+      </div>
+      <div class="svc-list">
+        <div class="svc-row">
+          <h3>Ongoing Advisory Retainer</h3>
+          <p>A standing advisory relationship providing on-demand access to Yukti's expertise across markets, asset classes, and deployment strategies — strategic guidance, market updates, and reactive advisory, continuously.</p>
+          <span class="svc-tag">Retainer</span>
+        </div>
+        <div class="svc-row">
+          <h3>Standard Market Advisory Reports</h3>
+          <p>Written advisory reports on market conditions, asset-level analysis, portfolio positioning, pricing dynamics, and comparable transaction analysis across our coverage universe.</p>
+          <span class="svc-tag">Research</span>
+        </div>
+        <div class="svc-row">
+          <h3>Complex Transaction Reports</h3>
+          <p>In-depth advisory reports for significant transactions — deal rationale, market positioning, risk factors, structuring considerations, and actionable recommendations. Prepared for transactions of material scale or complexity.</p>
+          <span class="svc-tag">Transaction</span>
+        </div>
+        <div class="svc-row">
+          <h3>Investment Memos &amp; Thesis Papers</h3>
+          <p>Structured investment memoranda and sector thesis papers on specific markets, geographies, and asset classes — designed to inform capital allocation decisions and long-term investment strategy.</p>
+          <span class="svc-tag">Research</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="svc-cat">
+      <div class="cat-hd">
+        <div class="cat-n">02</div>
+        <div class="cat-info">
+          <h2>Transaction Services</h2>
+          <p>Deal-level advisory, due diligence, and negotiation support</p>
+        </div>
+      </div>
+      <div class="svc-list">
+        <div class="svc-row">
+          <h3>On-Site Property Inspections</h3>
+          <p>Physical site visits and property assessments across our regions of coverage. Yukti advisors conduct on-ground inspections and prepare written findings on asset condition, location quality, development context, and market positioning.</p>
+          <span class="svc-tag">On-Ground</span>
+        </div>
+        <div class="svc-row">
+          <h3>Transaction-Specific Due Diligence</h3>
+          <p>Independent commercial due diligence for acquisitions and disposals — assessing the strength of the underlying market, the evidence behind pricing, the quality of the asset itself, and the soundness of the investment case. Free of any financing or transactional mandate.</p>
+          <span class="svc-tag">Diligence</span>
+        </div>
+        <div class="svc-row">
+          <h3>Deal Negotiation Support</h3>
+          <p>Commercial review of term sheets, heads of terms, and transaction documents. Advisory on deal structure, price negotiation strategy, and commercial terms — drawing on comparable transaction experience worldwide.</p>
+          <span class="svc-tag">Advisory</span>
+        </div>
+        <div class="svc-row">
+          <h3>Broker &amp; Partner Introductions</h3>
+          <p>Facilitated introductions to Yukti's curated network of developers, brokers, asset managers, and capital partners across our regions of coverage — always on behalf of our client, never as agent for a counterparty.</p>
+          <span class="svc-tag">Network</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="svc-cat">
+      <div class="cat-hd">
+        <div class="cat-n">03</div>
+        <div class="cat-info">
+          <h2>Portfolio &amp; Market Services</h2>
+          <p>Ongoing portfolio oversight, market entry, and bespoke mandates</p>
+        </div>
+      </div>
+      <div class="svc-list">
+        <div class="svc-row">
+          <h3>Quarterly Portfolio Review Meetings</h3>
+          <p>In-person strategic review sessions with client leadership — portfolio performance, market developments, positioning adjustments, and forward-looking capital deployment strategy across all geographies.</p>
+          <span class="svc-tag">Ongoing</span>
+        </div>
+        <div class="svc-row">
+          <h3>Market Entry &amp; Research Reports</h3>
+          <p>Detailed market entry analyses for specific geographies or asset classes — regulatory environment, market structure, key players, entry strategies, and risk considerations for first-time or expanded deployment.</p>
+          <span class="svc-tag">Research</span>
+        </div>
+        <div class="svc-row">
+          <h3>Ad-hoc Advisory Calls</h3>
+          <p>On-demand consultation sessions with Yukti advisors — reactive market intelligence, deal assessment, and strategic guidance on emerging opportunities as they arise.</p>
+          <span class="svc-tag">On-Demand</span>
+        </div>
+        <div class="svc-row">
+          <h3>Bespoke Engagements</h3>
+          <p>Custom advisory mandates structured to specific client requirements — cross-portfolio analysis, white-labelled research, or specialist input on non-standard situations.</p>
+          <span class="svc-tag">Custom</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="geo-sec">
+    <p class="eyebrow">Geographic Coverage</p>
+    <div class="rule"></div>
+    <h2 class="display">Regions We<br><em>Cover &amp; Know</em></h2>
+    <p class="geo-lead lead">Our coverage is organised by region, with depth in the principal investment markets of each. The cities named below indicate where our experience runs deepest — not where our mandate ends.</p>
+    <div class="geo-grid">
+      <div class="geo">
+        <p class="geo-rgn">Asia-Pacific</p>
+        <h3>Singapore &amp; the Wider Region</h3>
+        <p>Our home market and operational base, with depth in Singapore's institutional-grade commercial, residential, industrial, and hospitality sectors — and coverage extending across the broader Asia-Pacific investment landscape.</p>
+      </div>
+      <div class="geo">
+        <p class="geo-rgn">Middle East</p>
+        <h3>The Gulf</h3>
+        <p>Particular depth in Dubai and Abu Dhabi — freehold and leasehold sectors, free zone assets, hospitality, commercial, and luxury residential — with coverage spanning the wider Gulf and its accelerating cross-border capital flows.</p>
+      </div>
+      <div class="geo">
+        <p class="geo-rgn">South Asia</p>
+        <h3>South Asian Growth Markets</h3>
+        <p>Offices, retail, residential, and logistics across India's principal metropolitan markets and the wider region — with a deep understanding of inbound and outbound capital flows involving the South Asian real estate ecosystem.</p>
+      </div>
+      <div class="geo">
+        <p class="geo-rgn">The Americas</p>
+        <h3>North American Gateway Cities</h3>
+        <p>Advisory on commercial real estate with depth in gateway markets such as New York, Los Angeles, and Miami — and coverage across the broader North American landscape, spanning offices, multifamily, industrial, hospitality, and specialty assets.</p>
+      </div>
+      <div class="geo">
+        <p class="geo-rgn">Western Europe</p>
+        <h3>The United Kingdom &amp; Beyond</h3>
+        <p>London and regional UK markets — a core destination for Asian and Middle Eastern capital — alongside coverage of Western Europe's major commercial, residential, and mixed-use investment markets.</p>
+      </div>
+      <div class="geo">
+        <p class="geo-rgn">Southern Europe</p>
+        <h3>The Mediterranean Markets</h3>
+        <p>Southern European markets attracting growing cross-border capital — with depth in Spain, Italy, France, Portugal, and Greece — across tourism assets, prime residential, luxury hospitality, and commercial real estate.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="ft-top">
+      <div>
+        <div class="ft-logo">YUKTI<span>.</span></div>
+        <p class="ft-tag">Singapore-based independent real estate advisory for institutional and private capital across global markets.</p>
+        <p style="font-size:12px;color:var(--grey);margin-top:14px;line-height:1.75;">Yukti Trading Pte Ltd<br>UEN 202517859W<br>80 Raffles Place, #14-01, UOB Plaza<br>Singapore 048624</p>
+      </div>
+      <div>
+        <p class="ft-col-h">Navigate</p>
+        <ul class="ft-links">
+          <li><a data-go="home" tabindex="0" role="link">Home</a></li>
+          <li><a data-go="about" tabindex="0" role="link">About</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Services</a></li>
+          <li><a data-go="insights" tabindex="0" role="link">Insights</a></li>
+          <li><a data-go="contact" tabindex="0" role="link">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="ft-col-h">Services</p>
+        <ul class="ft-links">
+          <li><a data-go="services" tabindex="0" role="link">Research &amp; Reports</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Deal Advisory</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Due Diligence</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Portfolio Reviews</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Introductions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="ft-col-h">Contact</p>
+        <ul class="ft-links">
+          <li><a href="mailto:sales@yukti.sg">sales@yukti.sg</a></li>
+          <li><span>+65 XXXX XXXX</span></li>
+        </ul>
+
+      </div>
+    </div>
+    <div class="ft-bot">
+      <p class="ft-copy">© 2026 Yukti Trading Pte Ltd · UEN 202517859W · Incorporated in Singapore. All rights reserved.</p>
+      <div class="ft-leg">
+        <a data-modal="privacy" tabindex="0" role="button" style="cursor:pointer;">Privacy Policy</a>
+        <a data-modal="disclaimer" tabindex="0" role="button" style="cursor:pointer;">Disclaimer</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     INSIGHTS
+════════════════════════════════════════ -->
+<div id="p-insights" class="page">
+  <section class="page-hero">
+    <div class="ph-art" aria-hidden="true">
+      <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice"><g stroke="rgba(196,162,74,0.1)" stroke-width="0.8" fill="none"><path d="M30 420 L110 330 L180 365 L260 240 L340 150"/><path d="M30 460 L120 410 L200 425 L290 340 L360 290" stroke-dasharray="3,5"/></g><g fill="rgba(196,162,74,0.25)"><circle cx="110" cy="330" r="3"/><circle cx="260" cy="240" r="3"/><circle cx="340" cy="150" r="3"/></g></svg>
+    </div>
+    <div>
+      <p class="eyebrow">Insights</p>
+      <div class="rule"></div>
+      <h1 class="display">Perspectives on<br><em>Global Real Estate</em></h1>
+    </div>
+  </section>
+
+  <section class="insights-body">
+    <div class="ins-grid">
+      <div>
+        <p class="ins-intro">Yukti publishes periodic research on global real estate markets, capital-flow trends, and investment themes relevant to institutional and private capital deploying across borders. Our publications are distributed to clients and selected counterparties on a private basis.</p>
+        <div class="art-list">
+          <div class="art">
+            <div class="report-cover" aria-hidden="true">
+              <span class="rc-brand">YUKTI</span><div class="rc-rule"></div>
+              <div class="rc-title"></div><div class="rc-title s"></div>
+              <div class="rc-line"></div><div class="rc-line"></div><div class="rc-line s"></div>
+              <span class="rc-foot">Q2 2026</span>
+            </div>
+            <div>
+              <p class="art-tag">Market Outlook · Q2 2026</p>
+              <h3>Gulf Capital's Expanding Mandate in European Real Estate</h3>
+              <p>Tracking allocation patterns from Gulf sovereign and family vehicles into Southern and Western European property since 2023 — the structures being used, how pricing has responded, and where the next wave of capital is likely to concentrate.</p>
+            </div>
+          </div>
+          <div class="art">
+            <div class="report-cover" aria-hidden="true">
+              <span class="rc-brand">YUKTI</span><div class="rc-rule"></div>
+              <div class="rc-title"></div><div class="rc-title s"></div>
+              <div class="rc-line"></div><div class="rc-line"></div><div class="rc-line s"></div>
+              <span class="rc-foot">2026</span>
+            </div>
+            <div>
+              <p class="art-tag">Sector Deep Dive · 2026</p>
+              <h3>Singapore as an Asian Real Estate Capital Hub</h3>
+              <p>An assessment of Singapore's structural advantages — legal certainty, treaty network, and capital mobility — as a base for pan-Asian and global real estate strategies, with implications for how family capital structures its deployment vehicles.</p>
+            </div>
+          </div>
+          <div class="art">
+            <div class="report-cover" aria-hidden="true">
+              <span class="rc-brand">YUKTI</span><div class="rc-rule"></div>
+              <div class="rc-title"></div><div class="rc-title s"></div>
+              <div class="rc-line"></div><div class="rc-line"></div><div class="rc-line s"></div>
+              <span class="rc-foot">2025</span>
+            </div>
+            <div>
+              <p class="art-tag">Transaction Commentary · 2025</p>
+              <h3>Pricing Discovery in Illiquid Real Estate Markets</h3>
+              <p>Why bid-ask spreads persist in secondary and tertiary markets, how information asymmetry systematically penalises cross-border buyers, and the measurable value of independent local intelligence in price formation.</p>
+            </div>
+          </div>
+          <div class="art">
+            <div class="report-cover" aria-hidden="true">
+              <span class="rc-brand">YUKTI</span><div class="rc-rule"></div>
+              <div class="rc-title"></div><div class="rc-title s"></div>
+              <div class="rc-line"></div><div class="rc-line"></div><div class="rc-line s"></div>
+              <span class="rc-foot">2025</span>
+            </div>
+            <div>
+              <p class="art-tag">Thematic Research · 2025</p>
+              <h3>The Rise of Specialty Assets in Global Portfolios</h3>
+              <p>Allocation data on the institutional rotation into operational real estate — data centres, logistics, life sciences, and student housing — and the distinct underwriting disciplines these asset classes demand of investors accustomed to core property.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ins-sidebar">
+        <div class="ins-box">
+          <p class="eyebrow" style="margin-bottom:16px;">Client-Only Research</p>
+          <p>Our full research library is reserved for active clients and approved counterparties. We publish privately by design: our analysis is candid precisely because it is not written for a public audience. Prospective clients may request access as part of an initial conversation.</p>
+          <a class="btn-fill" data-go="contact" tabindex="0" role="link">Request Access</a>
+        </div>
+        <div class="ins-box">
+          <h4>Coverage Topics</h4>
+          <div class="topics">
+            <div class="topic-row">Asia-Pacific Markets</div>
+            <div class="topic-row">Gulf Freehold &amp; Leasehold</div>
+            <div class="topic-row">European Hospitality &amp; Residential</div>
+            <div class="topic-row">North American Commercial</div>
+            <div class="topic-row">South Asian Growth Markets</div>
+            <div class="topic-row">Cross-Border Capital Flows</div>
+            <div class="topic-row">Specialty Assets &amp; Alternatives</div>
+            <div class="topic-row">Macro &amp; Rate Outlook</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="ft-top">
+      <div>
+        <div class="ft-logo">YUKTI<span>.</span></div>
+        <p class="ft-tag">Singapore-based independent real estate advisory for institutional and private capital across global markets.</p>
+        <p style="font-size:12px;color:var(--grey);margin-top:14px;line-height:1.75;">Yukti Trading Pte Ltd<br>UEN 202517859W<br>80 Raffles Place, #14-01, UOB Plaza<br>Singapore 048624</p>
+      </div>
+      <div>
+        <p class="ft-col-h">Navigate</p>
+        <ul class="ft-links">
+          <li><a data-go="home" tabindex="0" role="link">Home</a></li>
+          <li><a data-go="about" tabindex="0" role="link">About</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Services</a></li>
+          <li><a data-go="insights" tabindex="0" role="link">Insights</a></li>
+          <li><a data-go="contact" tabindex="0" role="link">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="ft-col-h">Services</p>
+        <ul class="ft-links">
+          <li><a data-go="services" tabindex="0" role="link">Research &amp; Reports</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Deal Advisory</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Due Diligence</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Portfolio Reviews</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Introductions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="ft-col-h">Contact</p>
+        <ul class="ft-links">
+          <li><a href="mailto:sales@yukti.sg">sales@yukti.sg</a></li>
+          <li><span>+65 XXXX XXXX</span></li>
+        </ul>
+
+      </div>
+    </div>
+    <div class="ft-bot">
+      <p class="ft-copy">© 2026 Yukti Trading Pte Ltd · UEN 202517859W · Incorporated in Singapore. All rights reserved.</p>
+      <div class="ft-leg">
+        <a data-modal="privacy" tabindex="0" role="button" style="cursor:pointer;">Privacy Policy</a>
+        <a data-modal="disclaimer" tabindex="0" role="button" style="cursor:pointer;">Disclaimer</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     CONTACT
+════════════════════════════════════════ -->
+<div id="p-contact" class="page">
+  <div class="contact-wrap">
+    <div>
+      <p class="eyebrow">Contact</p>
+      <div class="rule"></div>
+      <h1 class="c-title">Let's Begin a<br><em>Conversation</em></h1>
+      <p class="c-intro">Yukti works with a select group of institutional and private capital clients. If you are deploying capital into global real estate and seeking independent advisory support, we welcome an initial conversation.</p>
+
+      <div class="c-details">
+        <div>
+          <p class="c-item-lbl">Headquarters</p>
+          <p class="c-item-val">Singapore</p>
+          <p class="c-item-sub">80 Raffles Place, #14-01, UOB Plaza, Singapore 048624</p>
+        </div>
+        <div>
+          <p class="c-item-lbl">General Enquiries</p>
+          <p class="c-item-val">sales@yukti.sg</p>
+        </div>
+        <div>
+          <p class="c-item-lbl">Telephone</p>
+          <p class="c-item-val">[+65 XXXX XXXX]</p>
+        </div>
+        <div>
+        </div>
+        <div>
+          <p class="c-item-lbl">Incorporated</p>
+          <p class="c-item-val">Republic of Singapore</p>
+          <p class="c-item-sub">Yukti Trading Pte Ltd · UEN 202517859W</p>
+        </div>
+      </div>
+
+      <div class="c-note">
+        <p><strong>Advisory enquiries only.</strong> We do not accept unsolicited broker introductions or fund pitches. All enquiries are reviewed by our senior team, and we respond to qualified opportunities within two business days.</p>
+      </div>
+    </div>
+
+    <div>
+      <div class="c-form" id="cform">
+        <div id="formBody">
+          <h2>Send an Enquiry</h2>
+          <div class="fgrp">
+            <label class="flbl" for="f-name">Full Name</label>
+            <input id="f-name" type="text" class="finp" placeholder="Your name">
+          </div>
+          <div class="fgrp">
+            <label class="flbl" for="f-org">Organisation</label>
+            <input id="f-org" type="text" class="finp" placeholder="Company or group name">
+          </div>
+          <div class="fgrp">
+            <label class="flbl" for="f-email">Email Address</label>
+            <input id="f-email" type="email" class="finp" placeholder="your@email.com">
+          </div>
+          <div class="fgrp">
+            <label class="flbl" for="f-nature">Nature of Enquiry</label>
+            <select id="f-nature" class="finp">
+              <option value="" disabled selected>Select a service area...</option>
+              <option>Advisory Services — General</option>
+              <option>Transaction Due Diligence</option>
+              <option>Market Research &amp; Reports</option>
+              <option>Portfolio Advisory</option>
+              <option>Insights Access</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="fgrp">
+            <label class="flbl" for="f-msg">Message</label>
+            <textarea id="f-msg" class="finp" placeholder="Brief description of your enquiry and geographies of interest..."></textarea>
+          </div>
+          <button class="btn-fill" id="submitBtn" style="width:100%;padding:16px;font-size:11px;">Submit Enquiry</button>
+          <p class="f-note">Your enquiry will be sent directly to the Yukti team at <a href="mailto:sales@yukti.sg" style="color:var(--gold-lt);text-decoration:none;">sales@yukti.sg</a> and treated with strict confidence.</p>
+          <p class="f-mailto">Prefer to write directly? <a href="mailto:sales@yukti.sg">sales@yukti.sg</a></p>
+        </div>
+        <div class="f-confirm" id="formConfirm">
+          <svg viewBox="0 0 46 46" fill="none"><circle cx="23" cy="23" r="21" stroke="currentColor" stroke-width="1.2"/><path d="M14 23 L20 29 L32 16" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+          <h3>Your enquiry has been received</h3>
+          <p>Thank you. Our team will review your enquiry and respond within two business days. All correspondence is held in strict confidence.</p>
+        </div>
+      </div>
+
+      <div class="expect">
+        <h4>What to Expect</h4>
+        <div class="expect-row">
+          <div class="ex-step">
+            <div class="ex-ic"><svg viewBox="0 0 15 15" fill="none"><path d="M1 4 L7.5 8.5 L14 4 M1 4 V11.5 H14 V4" stroke="currentColor" stroke-width="1.1"/></svg></div>
+            <p><strong>Submit</strong>Your enquiry reaches our senior team directly</p>
+          </div>
+          <div class="ex-step">
+            <div class="ex-ic"><svg viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.1"/><path d="M7.5 4 V7.5 L10 9.5" stroke="currentColor" stroke-width="1.1"/></svg></div>
+            <p><strong>Review</strong>Response within 2 business days</p>
+          </div>
+          <div class="ex-step">
+            <div class="ex-ic"><svg viewBox="0 0 15 15" fill="none"><path d="M3 2 H6 L7.5 5.5 L5.5 7 C6.2 9 8 10.5 10 11.2 L11.5 9.2 L13 11 V13 C13 13 9 13.5 5 9.5 C1.5 6 2 2 3 2Z" stroke="currentColor" stroke-width="1" fill="none"/></svg></div>
+            <p><strong>Initial Call</strong>A confidential conversation on your mandate</p>
+          </div>
+          <div class="ex-step">
+            <div class="ex-ic"><svg viewBox="0 0 15 15" fill="none"><rect x="2.5" y="1.5" width="10" height="12" stroke="currentColor" stroke-width="1.1"/><line x1="5" y1="5" x2="10" y2="5" stroke="currentColor" stroke-width="0.9"/><line x1="5" y1="7.5" x2="10" y2="7.5" stroke="currentColor" stroke-width="0.9"/><line x1="5" y1="10" x2="8" y2="10" stroke="currentColor" stroke-width="0.9"/></svg></div>
+            <p><strong>Proposal</strong>Written scope and engagement terms</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="faq-sec">
+    <p class="eyebrow">Frequently Asked</p>
+    <div class="rule"></div>
+    <h2 class="display">Questions Prospective<br><em>Clients Ask Us</em></h2>
+    <p class="faq-lead lead">Straight answers to the questions that matter before an engagement begins.</p>
+    <div class="faq-list">
+
+      <div class="faq">
+        <button class="faq-q" aria-expanded="false">Are you a broker or estate agent?</button>
+        <div class="faq-a"><p><strong>No.</strong> Yukti holds no brokerage mandate and does not represent buyers or sellers in a transaction-execution capacity. Our role is advisory: research, analysis, due diligence, and negotiation support. Where useful, we facilitate introductions within our network — but always on behalf of our client, never as agent for a counterparty. This distinction is what keeps our advice unconflicted.</p></div>
+      </div>
+
+      <div class="faq">
+        <button class="faq-q" aria-expanded="false">How are you compensated?</button>
+        <div class="faq-a"><p><strong>By our clients, transparently.</strong> Engagements typically combine a retainer, per-deliverable fees, and — for certain transaction-support mandates — deal-linked fees agreed in writing before any work begins. What we never accept are rebates, referral fees, or commissions from brokers, developers, or counterparties. Our economics sit entirely on the client's side of the table, which is the only place independent advice can come from.</p></div>
+      </div>
+
+      <div class="faq">
+        <button class="faq-q" aria-expanded="false">How is an engagement structured?</button>
+        <div class="faq-a"><p>Under a <strong>Master Services Agreement</strong>, with individual Statements of Work for larger or transaction-specific mandates. Clients engage us on a retainer basis, a project basis, or both. Engagements are non-exclusive on both sides — we believe a relationship sustained by the quality of the work is stronger than one sustained by a lock-in.</p></div>
+      </div>
+
+      <div class="faq">
+        <button class="faq-q" aria-expanded="false">What falls outside your scope?</button>
+        <div class="faq-a"><p>We do not provide <strong>legal opinions, formal valuations or appraisals, tax advice, audit or assurance services, or regulatory filings.</strong> Where an engagement touches these areas, we work alongside the client's qualified professional advisers. This discipline is deliberate: it keeps our advice within the domain we know best, and keeps every specialist accountable for their own.</p></div>
+      </div>
+
+      <div class="faq">
+        <button class="faq-q" aria-expanded="false">Is my enquiry — and engagement — confidential?</button>
+        <div class="faq-a"><p><strong>Yes, strictly.</strong> Confidentiality is contractual, applies on a need-to-know basis within our team, and survives the engagement itself. Discretion is structural to how Yukti operates: much of our value depends on clients being able to share strategy, portfolio detail, and transaction terms candidly. We protect that candour without exception.</p></div>
+      </div>
+
+      <div class="faq">
+        <button class="faq-q" aria-expanded="false">Who do you work with — and who don't you?</button>
+        <div class="faq-a"><p>We work with <strong>family offices, conglomerates, and institutional investors</strong> deploying capital into global real estate. We do not work with retail investors, and we do not act for property developers seeking capital — both exclusions exist to keep our advisory relationships free of placement-side incentives.</p></div>
+      </div>
+
+      <div class="faq">
+        <button class="faq-q" aria-expanded="false">Which geographies do you cover?</button>
+        <div class="faq-a"><p><strong>Our mandate is global.</strong> We maintain particular depth across Asia-Pacific, the Middle East, Europe, the Americas, and South Asia — and within each region, in its principal investment markets. We follow our clients' capital wherever it is deployed; coverage expands with the mandate, not the other way around.</p></div>
+      </div>
+
+      <div class="faq">
+        <button class="faq-q" aria-expanded="false">Do you guarantee investment outcomes?</button>
+        <div class="faq-a"><p><strong>No serious adviser can.</strong> Our deliverables are advisory and informational in nature; investment decisions rest with the client. What we do stand behind, without qualification, is the rigour, independence, and candour of the analysis underneath every recommendation we make.</p></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="ft-top">
+      <div>
+        <div class="ft-logo">YUKTI<span>.</span></div>
+        <p class="ft-tag">Singapore-based independent real estate advisory for institutional and private capital across global markets.</p>
+        <p style="font-size:12px;color:var(--grey);margin-top:14px;line-height:1.75;">Yukti Trading Pte Ltd<br>UEN 202517859W<br>80 Raffles Place, #14-01, UOB Plaza<br>Singapore 048624</p>
+      </div>
+      <div>
+        <p class="ft-col-h">Navigate</p>
+        <ul class="ft-links">
+          <li><a data-go="home" tabindex="0" role="link">Home</a></li>
+          <li><a data-go="about" tabindex="0" role="link">About</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Services</a></li>
+          <li><a data-go="insights" tabindex="0" role="link">Insights</a></li>
+          <li><a data-go="contact" tabindex="0" role="link">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="ft-col-h">Services</p>
+        <ul class="ft-links">
+          <li><a data-go="services" tabindex="0" role="link">Research &amp; Reports</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Deal Advisory</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Due Diligence</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Portfolio Reviews</a></li>
+          <li><a data-go="services" tabindex="0" role="link">Introductions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="ft-col-h">Contact</p>
+        <ul class="ft-links">
+          <li><a href="mailto:sales@yukti.sg">sales@yukti.sg</a></li>
+          <li><span>+65 XXXX XXXX</span></li>
+        </ul>
+
+      </div>
+    </div>
+    <div class="ft-bot">
+      <p class="ft-copy">© 2026 Yukti Trading Pte Ltd · UEN 202517859W · Incorporated in Singapore. All rights reserved.</p>
+      <div class="ft-leg">
+        <a data-modal="privacy" tabindex="0" role="button" style="cursor:pointer;">Privacy Policy</a>
+        <a data-modal="disclaimer" tabindex="0" role="button" style="cursor:pointer;">Disclaimer</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
+<script>
+/* ── Navigation (keyboard accessible) ────── */
+function go(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.nav-links a, .drawer a').forEach(a => a.classList.remove('on'));
+  document.getElementById('p-' + id).classList.add('on');
+  const nl = document.getElementById('n-' + id);
+  const dl = document.getElementById('d-' + id);
+  if (nl) nl.classList.add('on');
+  if (dl) dl.classList.add('on');
+  closeDrawer();
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+document.querySelectorAll('[data-go]').forEach(el => {
+  const dest = el.getAttribute('data-go');
+  el.addEventListener('click', () => go(dest));
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(dest); }
+  });
+});
+
+/* ── Drawer ───────────────────────────────── */
+const drawer = document.getElementById('drawer');
+const scrim  = document.getElementById('scrim');
+const burger = document.getElementById('burger');
+function openDrawer()  { drawer.classList.add('open'); scrim.classList.add('show'); burger.setAttribute('aria-expanded','true'); }
+function closeDrawer() { drawer.classList.remove('open'); scrim.classList.remove('show'); burger.setAttribute('aria-expanded','false'); }
+burger.addEventListener('click', openDrawer);
+scrim.addEventListener('click', closeDrawer);
+document.getElementById('drawerClose').addEventListener('click', closeDrawer);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+/* ── Nav stick + scroll progress ──────────── */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('stuck', window.scrollY > 48);
+  const h = document.documentElement;
+  const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  document.getElementById('progress').style.width = pct + '%';
+});
+
+/* ── Hero coordinate cycle ────────────────── */
+(function(){
+  const coords = ['25.2048°N 55.2708°E','51.5074°N 0.1278°W','40.7128°N 74.0060°W','19.0760°N 72.8777°E','41.3851°N 2.1734°E','1.3521°N 103.8198°E'];
+  let i = 0;
+  const el = document.querySelector('.hero-coord');
+  if (el) setInterval(() => {
+    i = (i + 1) % coords.length;
+    el.style.opacity = '0';
+    setTimeout(() => { el.textContent = coords[i]; el.style.opacity = '1'; }, 400);
+  }, 3200);
+})();
+
+/* ── Hero facade floor lines (procedural) ─── */
+(function(){
+  const g = document.getElementById('floors');
+  if (!g) return;
+  let s = '';
+  for (let y = 120; y < 900; y += 26) {
+    s += `<line x1="235" y1="${y+ (900-y)*0.02}" x2="775" y2="${y}"/>`;
+  }
+  g.innerHTML = s;
+})();
+
+/* ── Dotted world map ─────────────────────── */
+(function(){
+  const svg = document.getElementById('worldmap');
+  if (!svg) return;
+  const W = 1000, H = 500;
+  const px = (lon,lat) => [ (lon+180)/360*W, (90-lat)/180*H ];
+
+  // Land polygons in [lon,lat]
+  const land = [
+    // North America
+    [[-166,68],[-156,71],[-130,70],[-110,73],[-95,72],[-85,69],[-80,72],[-72,62],[-65,59],[-55,52],[-55,48],[-65,45],[-70,42],[-75,38],[-76,35],[-80,32],[-80,26],[-82,28],[-84,30],[-90,29],[-94,29],[-97,26],[-97,22],[-95,18],[-92,15],[-88,14],[-85,11],[-80,8],[-78,8],[-83,9],[-87,13],[-92,15],[-96,17],[-105,21],[-110,24],[-114,29],[-117,33],[-122,37],[-124,42],[-124,48],[-128,52],[-132,56],[-140,60],[-150,60],[-160,58],[-166,62]],
+    // Greenland
+    [[-46,60],[-42,62],[-22,70],[-20,76],[-30,83],[-58,82],[-68,78],[-60,75],[-55,70],[-52,65]],
+    // South America
+    [[-78,8],[-72,12],[-65,10],[-60,8],[-52,5],[-50,0],[-44,-3],[-38,-5],[-35,-8],[-38,-13],[-40,-20],[-42,-23],[-48,-26],[-52,-32],[-58,-35],[-62,-39],[-65,-42],[-66,-47],[-69,-50],[-68,-54],[-72,-52],[-74,-46],[-73,-40],[-72,-34],[-70,-25],[-70,-18],[-76,-14],[-79,-7],[-81,-4],[-80,0],[-78,4]],
+    // Eurasia (one mass)
+    [[-10,36],[-9,43],[-2,47],[0,50],[5,53],[8,56],[8,58],[5,59],[5,62],[14,67],[22,70],[28,71],[33,69],[40,67],[44,68],[50,69],[60,69],[68,69],[73,68],[80,71],[90,73],[100,76],[110,74],[120,73],[130,71],[140,72],[150,70],[160,69],[170,67],[178,66],[178,64],[170,60],[162,58],[160,53],[156,51],[142,53],[140,48],[135,44],[131,43],[128,38],[126,35],[122,30],[121,25],[118,23],[112,21],[109,17],[106,10],[104,7],[103,1],[100,6],[98,10],[98,15],[94,16],[91,22],[88,21],[86,20],[83,17],[80,13],[78,8],[76,10],[73,16],[70,20],[68,23],[66,25],[61,25],[57,26],[56,26],[55,17],[48,14],[43,12],[40,16],[38,20],[35,28],[34,30],[36,36],[30,37],[27,37],[26,40],[24,38],[22,37],[20,40],[19,42],[15,44],[13,45],[12,44],[15,40],[18,40],[16,38],[13,38],[10,43],[8,44],[3,43],[0,40],[-5,36]],
+    // Africa
+    [[-6,35],[-10,31],[-15,27],[-17,21],[-16,16],[-17,14],[-15,11],[-12,8],[-8,5],[-4,5],[4,6],[8,4],[9,1],[9,-2],[12,-6],[12,-12],[14,-17],[15,-22],[17,-29],[19,-34],[22,-34],[26,-34],[31,-30],[33,-26],[35,-22],[36,-18],[39,-15],[40,-10],[41,-4],[43,0],[46,4],[51,11],[48,11],[43,12],[40,15],[38,18],[37,22],[34,28],[32,31],[25,32],[20,32],[15,32],[10,34],[5,36],[0,36]],
+    // Madagascar
+    [[44,-12],[50,-16],[47,-25],[44,-22],[43,-16]],
+    // Australia
+    [[114,-22],[113,-26],[115,-32],[118,-35],[124,-33],[129,-32],[132,-32],[135,-35],[138,-36],[140,-38],[146,-39],[150,-37],[153,-32],[153,-27],[151,-24],[149,-20],[146,-18],[142,-11],[137,-12],[136,-15],[132,-12],[130,-13],[126,-14],[122,-17],[118,-20]],
+    // UK
+    [[-5,50],[-6,54],[-5,58],[-3,59],[-2,57],[0,53],[1,52],[0,51],[-3,50]],
+    // Ireland
+    [[-10,52],[-10,55],[-6,55],[-6,52]],
+    // Japan
+    [[129,31],[133,34],[137,37],[140,41],[143,45],[145,44],[141,38],[136,34],[131,30]],
+    // Sumatra
+    [[95,5],[98,3],[102,-1],[106,-6],[104,-6],[100,-1],[96,3]],
+    // Borneo
+    [[109,1],[113,4],[117,4],[119,1],[117,-3],[113,-4],[110,-2]],
+    // Java
+    [[105,-6],[110,-7],[114,-8],[112,-9],[106,-7]],
+    // New Guinea
+    [[131,-1],[136,-2],[141,-3],[147,-6],[150,-9],[145,-8],[140,-8],[135,-4],[131,-2]],
+    // Philippines
+    [[120,18],[122,14],[124,10],[126,7],[123,9],[120,14]],
+    // New Zealand
+    [[167,-45],[170,-43],[173,-41],[174,-37],[176,-38],[173,-43],[168,-46]]
+  ].map(poly => poly.map(p => px(p[0], p[1])));
+
+  function inside(x, y, poly) {
+    let inn = false;
+    for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+      const xi = poly[i][0], yi = poly[i][1], xj = poly[j][0], yj = poly[j][1];
+      if (((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)) inn = !inn;
+    }
+    return inn;
+  }
+
+  // Region markers [lon, lat, label, anchor]
+  const regions = [
+    [-92, 38, 'AMERICAS', 'end'],
+    [10, 50, 'EUROPE', 'start'],
+    [48, 25, 'MIDDLE EAST', 'end'],
+    [77, 21, 'SOUTH ASIA', 'start'],
+    [122, 8, 'ASIA-PACIFIC', 'start']
+  ].map(r => { const [x,y] = px(r[0], r[1]); return {x, y, label:r[2], anchor:r[3]}; });
+  const sg = px(103.8, 1.35);
+
+  // Dots
+  let dots = '';
+  const step = 8;
+  for (let x = step/2; x < W; x += step) {
+    for (let y = step/2; y < H - 30; y += step) {
+      if (land.some(p => inside(x, y, p))) {
+        let near = false;
+        for (const r of regions) {
+          if ((x - r.x)**2 + (y - r.y)**2 < 3600) { near = true; break; }
+        }
+        dots += `<circle cx="${x}" cy="${y}" r="1.35" fill="rgba(196,162,74,${near ? 0.55 : 0.24})"/>`;
+      }
+    }
+  }
+
+  // Connection arcs from Singapore to each region
+  let arcs = '';
+  for (const r of regions) {
+    const mx = (sg[0] + r.x) / 2, my = Math.min(sg[1], r.y) - 55;
+    arcs += `<path d="M${sg[0]} ${sg[1]} Q ${mx} ${my} ${r.x} ${r.y}" fill="none" stroke="rgba(196,162,74,0.16)" stroke-width="0.8" stroke-dasharray="3,6"/>`;
+  }
+
+  // Markers
+  let marks = '';
+  regions.forEach((r, i) => {
+    const tx = r.anchor === 'end' ? r.x - 12 : r.x + 12;
+    marks += `<g>
+      <circle class="pulse-ring" cx="${r.x}" cy="${r.y}" r="9" fill="none" stroke="#C4A24A" stroke-width="1" style="animation-delay:${i*0.55}s"/>
+      <circle cx="${r.x}" cy="${r.y}" r="3.5" fill="#C4A24A"/>
+      <text x="${tx}" y="${r.y - 8}" fill="#D9BB6E" font-size="10" font-family="Space Grotesk,sans-serif" letter-spacing="0.12em" text-anchor="${r.anchor}" opacity="0.95">${r.label}</text>
+    </g>`;
+  });
+  // Singapore HQ star marker
+  marks += `<g>
+    <circle class="pulse-ring" cx="${sg[0]}" cy="${sg[1]}" r="11" fill="none" stroke="#D9BB6E" stroke-width="1.2"/>
+    <circle cx="${sg[0]}" cy="${sg[1]}" r="4.5" fill="#D9BB6E"/>
+    <circle cx="${sg[0]}" cy="${sg[1]}" r="1.8" fill="#080C18"/>
+    <text x="${sg[0] + 14}" y="${sg[1] + 14}" fill="#D9BB6E" font-size="9.5" font-family="Space Grotesk,sans-serif" letter-spacing="0.12em" opacity="0.95">SINGAPORE — HQ</text>
+  </g>`;
+
+  // Graticule
+  let grat = '';
+  for (let lat = -60; lat <= 80; lat += 20) {
+    const [, y] = px(0, lat);
+    grat += `<line x1="0" y1="${y}" x2="${W}" y2="${y}" stroke="rgba(196,162,74,0.05)" stroke-width="0.5"/>`;
+  }
+  for (let lon = -150; lon <= 180; lon += 30) {
+    const [x] = px(lon, 0);
+    grat += `<line x1="${x}" y1="0" x2="${x}" y2="${H}" stroke="rgba(196,162,74,0.05)" stroke-width="0.5"/>`;
+  }
+
+  svg.innerHTML = grat + dots + arcs + marks;
+})();
+
+/* ── FAQ accordion ────────────────────────── */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const faq = btn.parentElement;
+    const ans = faq.querySelector('.faq-a');
+    const isOpen = faq.classList.contains('open');
+    document.querySelectorAll('.faq.open').forEach(f => {
+      f.classList.remove('open');
+      f.querySelector('.faq-a').style.maxHeight = '0';
+      f.querySelector('.faq-q').setAttribute('aria-expanded','false');
+    });
+    if (!isOpen) {
+      faq.classList.add('open');
+      ans.style.maxHeight = ans.scrollHeight + 'px';
+      btn.setAttribute('aria-expanded','true');
+    }
+  });
+});
+
+/* ── Select colour fix ────────────────────── */
+document.querySelectorAll('select.finp').forEach(sel => {
+  sel.addEventListener('change', () => { sel.style.color = 'var(--white)'; });
+});
+
+/* ── Form submit confirmation ─────────────── */
+document.getElementById('submitBtn').addEventListener('click', () => {
+  const name   = document.getElementById('f-name').value.trim();
+  const org    = document.getElementById('f-org').value.trim();
+  const email  = document.getElementById('f-email').value.trim();
+  const nature = document.getElementById('f-nature').value;
+  const msg    = document.getElementById('f-msg').value.trim();
+  const subject = encodeURIComponent('Enquiry — ' + (nature||'General') + (org ? ' · ' + org : ''));
+  const body = encodeURIComponent(
+    'Name: ' + (name||'—') + '\nOrganisation: ' + (org||'—') + '\nEmail: ' + (email||'—') +
+    '\nNature of enquiry: ' + (nature||'—') + '\n\nMessage:\n' + (msg||'—')
+  );
+  window.location.href = 'mailto:sales@yukti.sg?subject=' + subject + '&body=' + body;
+  setTimeout(() => {
+    document.getElementById('formBody').style.display = 'none';
+    document.getElementById('formConfirm').classList.add('show');
+  }, 800);
+});
+</script>
+
+<!-- Privacy Policy Modal -->
+<div class="modal-bg" id="modal-privacy" role="dialog" aria-label="Privacy Policy" aria-modal="true">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+    <h2>Privacy Policy</h2>
+    <span class="modal-date">Effective: June 2026 &nbsp;·&nbsp; Yukti Trading Pte Ltd</span>
+
+    <h3>1. Introduction</h3>
+    <p>Yukti Trading Pte Ltd (UEN 202517859W), incorporated in Singapore (<strong>"Yukti"</strong>, <strong>"we"</strong>, <strong>"our"</strong>), is committed to protecting the privacy of all individuals who interact with us. This Policy explains how we collect, use, disclose, and protect personal data in accordance with Singapore's <strong>Personal Data Protection Act 2012 (PDPA)</strong> and, where applicable, the <strong>General Data Protection Regulation (GDPR)</strong>.</p>
+    <p>By submitting an enquiry, engaging our services, or otherwise communicating with us, you consent to the collection and use of your personal data as described in this Policy.</p>
+
+    <h3>2. Data We Collect</h3>
+    <p>We collect only the personal data necessary for the purpose for which it is collected. This may include:</p>
+    <ul>
+      <li><strong>Identity and contact data:</strong> name, title, company name, email address, telephone number.</li>
+      <li><strong>Engagement data:</strong> details of your enquiry, mandate, or advisory engagement, including information about your investment objectives, portfolio, and transaction interests.</li>
+      <li><strong>Communication data:</strong> records of correspondence between you and Yukti.</li>
+      <li><strong>Website data:</strong> standard technical data collected when you visit our website, including browser type, device type, and pages visited. We do not use tracking cookies or third-party analytics tools.</li>
+    </ul>
+
+    <h3>3. How We Use Your Data</h3>
+    <p>We use your personal data to:</p>
+    <ul>
+      <li>Respond to your enquiries and assess whether an advisory relationship is appropriate;</li>
+      <li>Perform our advisory services under any engagement or Master Services Agreement;</li>
+      <li>Comply with applicable legal and regulatory obligations;</li>
+      <li>Maintain records for audit and compliance purposes.</li>
+    </ul>
+    <p>We do not use your personal data for marketing, profiling, or automated decision-making. We do not sell, rent, or trade your personal data to any third party.</p>
+
+    <h3>4. Disclosure of Data</h3>
+    <p>Your personal data is shared on a strict need-to-know basis within the Yukti team. We may disclose your data to third parties only in the following circumstances:</p>
+    <ul>
+      <li>Where required by applicable law, regulation, court order, or governmental authority — in which case we will, to the extent legally permitted, notify you before disclosure;</li>
+      <li>With professional advisers (legal, accounting, or compliance) bound by confidentiality obligations;</li>
+      <li>Where you have expressly authorised such disclosure in writing.</li>
+    </ul>
+    <p>We do not transfer personal data outside Singapore or the EEA without ensuring adequate safeguards are in place as required by applicable law.</p>
+
+    <h3>5. Data Retention</h3>
+    <p>We retain personal data only for as long as necessary for the purposes for which it was collected, or as required by applicable law. For active client relationships, data is retained for the duration of the engagement and for seven (7) years thereafter for legal and compliance purposes. Enquiry data from non-clients is retained for no longer than two (2) years from the date of last contact.</p>
+
+    <h3>6. Security</h3>
+    <p>We implement appropriate technical and organisational measures to protect your personal data against unauthorised access, loss, alteration, or destruction. Access to personal data within Yukti is restricted to team members with a legitimate need. All client engagement data is handled with the same level of discretion as confidential information under our service agreements.</p>
+
+    <h3>7. Your Rights</h3>
+    <p>Under the PDPA and, where applicable, the GDPR, you have the right to access, correct, withdraw consent to, or request erasure of your personal data held by us, subject to applicable exceptions. To exercise any of these rights, please contact us at <a href="mailto:sales@yukti.sg" style="color:var(--gold-lt);text-decoration:none;">sales@yukti.sg</a>. We will respond within 30 days.</p>
+
+    <h3>8. Cookies</h3>
+    <p>Our website does not use cookies, tracking pixels, or third-party analytics tools. No personal data is collected automatically when you visit the site beyond standard server log data.</p>
+
+    <h3>9. Changes to This Policy</h3>
+    <p>We may update this Policy from time to time. The current version and its effective date will always be published on our website. Material changes will be communicated directly to active clients.</p>
+
+    <h3>10. Contact</h3>
+    <p>For any privacy-related questions or to exercise your rights, please write to us at <a href="mailto:sales@yukti.sg" style="color:var(--gold-lt);text-decoration:none;">sales@yukti.sg</a> or at our registered address: 80 Raffles Place, #14-01, UOB Plaza, Singapore 048624.</p>
+  </div>
+</div>
+
+<!-- Disclaimer Modal -->
+<div class="modal-bg" id="modal-disclaimer" role="dialog" aria-label="Disclaimer" aria-modal="true">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+    <h2>Disclaimer</h2>
+    <span class="modal-date">Effective: June 2026 &nbsp;·&nbsp; Yukti Trading Pte Ltd</span>
+
+    <h3>1. Nature of Information</h3>
+    <p>The information published on this website by Yukti Trading Pte Ltd (UEN 202517859W) (<strong>"Yukti"</strong>) is provided for general informational and business development purposes only. It does not constitute, and should not be construed as, investment advice, financial advice, legal advice, tax advice, a valuation or appraisal, or any other form of professional advice regulated under Singapore law or the laws of any other jurisdiction.</p>
+    <p>No content on this website creates or implies a client relationship between Yukti and any reader. A formal advisory relationship is established only upon execution of a written engagement agreement — typically a Master Services Agreement — signed by both parties.</p>
+
+    <h3>2. No Reliance</h3>
+    <p>You should not rely on any information contained on this website as the basis for making any investment, business, legal, or financial decision. Any decisions made on the basis of information on this site are made entirely at your own risk and discretion. Yukti accepts no responsibility for any loss or damage arising from reliance on information contained on this website.</p>
+
+    <h3>3. No Warranty</h3>
+    <p>Whilst Yukti takes care to ensure that the information on this website is accurate and current, we make no representations or warranties of any kind, express or implied, as to the accuracy, completeness, timeliness, or fitness for purpose of any information published here. Market data, geographic information, and service descriptions are subject to change without notice.</p>
+
+    <h3>4. Forward-Looking Statements</h3>
+    <p>This website may contain statements that are forward-looking in nature, including views on real estate markets, investment themes, and capital flows. These statements are based on Yukti's assessment of information available at the time of writing and involve known and unknown risks, uncertainties, and assumptions. Actual outcomes may differ materially. No forward-looking statement should be treated as a guarantee of future performance or results.</p>
+
+    <h3>5. Scope Exclusions</h3>
+    <p>Yukti's services, as described on this website, expressly exclude: legal opinions and legal representation; formal property valuations or appraisals; tax advice and tax compliance; regulatory filings; audit, assurance, or attestation services; and any service requiring a professional licence or regulatory authorisation that Yukti does not hold. Any such matters should be referred to an appropriately qualified and licensed professional.</p>
+
+    <h3>6. Third-Party Links</h3>
+    <p>This website does not contain links to third-party websites. If any such links are introduced in future, Yukti accepts no responsibility for the content, accuracy, or practices of any linked third-party site.</p>
+
+    <h3>7. Intellectual Property</h3>
+    <p>All content on this website — including text, graphics, logo, and structural design — is the property of Yukti Trading Pte Ltd and is protected by applicable intellectual property laws. No content may be reproduced, distributed, or used in any form without Yukti's prior written consent.</p>
+
+    <h3>8. Governing Law</h3>
+    <p>This Disclaimer is governed by and construed in accordance with the laws of the Republic of Singapore. Any dispute arising in connection with this Disclaimer shall be subject to the exclusive jurisdiction of the courts of Singapore.</p>
+
+    <h3>9. Contact</h3>
+    <p>For any questions regarding this Disclaimer, please contact us at <a href="mailto:sales@yukti.sg" style="color:var(--gold-lt);text-decoration:none;">sales@yukti.sg</a>.</p>
+  </div>
+</div>
+
+<script>
+/* ── Modal logic ── */
+function openModal(id) {
+  const m = document.getElementById('modal-' + id);
+  if (m) { m.classList.add('open'); document.body.style.overflow = 'hidden'; }
+}
+function closeModal() {
+  document.querySelectorAll('.modal-bg.open').forEach(m => m.classList.remove('open'));
+  document.body.style.overflow = '';
+}
+document.addEventListener('click', e => {
+  const target = e.target.closest('[data-modal]');
+  if (target) { e.preventDefault(); openModal(target.getAttribute('data-modal')); }
+  if (e.target.classList.contains('modal-bg')) closeModal();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
+</body>
+</html>
